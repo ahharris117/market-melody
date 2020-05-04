@@ -1,0 +1,61 @@
+:root {
+  --black: #0b132b;
+  --darkblue: #1c2541;
+  --grey: #3a506b;
+  --aqua: #5bc0be;
+  --aqua-neon: #6fffe9;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--aqua);
+  font-family: 'Roboto Slab', serif;
+}
+
+a {
+  color: var(--aqua-neon);
+  font-family: 'Roboto Slab', serif;
+}
+
+.main-image {
+  max-height: 400px;
+  width: 100%
+}
+
+.navbar {
+  background-color: var(--black);
+}
+
+.homeline {
+  margin: 40px;
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+}
+
+.homelink {
+  padding: 20px;
+  margin: 30px;
+  font-size: 1.2em;
+  text-align: center;
+  transition: all .5s linear;
+  &:hover {
+    color: var(--aqua-neon);
+    background-color: var(--grey);
+    border: 1px solid var(--aqua-neon);
+    border-radius: 10px;
+  }
+}
+
+.quote {
+  color: var(--grey);
+  position: absolute;
+  left: 7em;
+  top: 9em;
+}
+
+.quote2 {
+  color: var(--grey);
+  position: absolute;
+  right: 7em;
+  bottom: 20em;
+}
