@@ -6,6 +6,7 @@ const FormContainer = props => {
   const [ scales, setScales ] = useState([])
   const [ melody, setMelody ] = useState()
   const [ showPlay, shouldShowPlay ] = useState(false)
+  const [ errorMessage, setErrorMessage ] = useState("")
   useEffect(() => {
     fetch('/api/v1/scales')
     .then((response) => {
@@ -38,27 +39,34 @@ const FormContainer = props => {
     .then((response) => {
       if (response.status === 200) {
         shouldShowPlay(true)
+      } else {
+        shouldShowPlay(false)
       }
       return response.json()
     })
     .then((response) => {
+      if (response.status === 'error') {
+        throw new Error(response.message)
+      }
+      setErrorMessage("")
       setMelody(response)
     })
+    .catch((error) => {
+      setErrorMessage(error.message)
+    })
   }
-
+  let playComponent;
   if (showPlay === true) {
-    return(
-      <div>
-       <Form scales={scales} submitForm={submitForm} />
-       <Play melody={melody} />
-      </div>
-    )
+    playComponent = <Play melody={melody} />
   } else {
-    return(
-      <Form scales={scales} submitForm={submitForm} />
-    )
+    playComponent = ""
   }
-
+  return(
+    <div>
+     <Form scales={scales} error={errorMessage} submitForm={submitForm} />
+     {playComponent}
+    </div>
+  )
 }
 
 export default FormContainer

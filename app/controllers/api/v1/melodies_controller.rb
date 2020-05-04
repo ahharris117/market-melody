@@ -1,4 +1,5 @@
 require 'faraday'
+
 class Api::V1::MelodiesController < ApplicationController
   protect_from_forgery with: :null_session
   protect_from_forgery unless: -> { request.format.json? }
@@ -10,29 +11,35 @@ class Api::V1::MelodiesController < ApplicationController
     api_response = Faraday.get(url)
     parsed_response = JSON.parse(api_response.body)
 
-    price_array = []
-
-    counter = 1
-    parsed_response["Weekly Time Series"].each do |key, value|
-      if counter <= 36
-        price_array.push(value["1. open"].to_f)
-        counter += 1
-      elsif counter > 36
-        break
+    if parsed_response["Error Message"]
+      render json: { status: 'error', message: "Invalid symbol" }, status: 500
+    elsif parsed_response["Weekly Time Series"].length < 36
+      render json: { status: 'error', message: "Not enough data, stock must have at least 36 data points" }, status: 500
+    else
+      stock_data = []
+      counter = 1
+      parsed_response["Weekly Time Series"].each do |key, value|
+        if counter <= 36
+          stock_data.push({
+            "date" => key,
+            "price" => value["1. open"]
+          })
+          counter += 1
+        else
+          break
+        end
       end
-    end
 
-    price_string = price_array.join(' ')
+      stock = Stock.create(symbol: params[:stock], prices: stock_data)
+      @melody = Melody.new
+      if user_signed_in?
+        @melody.user = current_user
+      end
 
-    stock = Stock.create(symbol: params[:stock], prices: price_string)
-    @melody = Melody.new
-    if user_signed_in?
-      @melody.user = current_user
+      @melody.stock = stock
+      @melody.scale = Scale.find_by(name: params[:scale])
+      render json: @melody.get_melody
     end
-    
-    @melody.stock = stock
-    @melody.scale = Scale.find_by(name: params[:scale])
-    render json: @melody.get_melody
   end
 
   def show

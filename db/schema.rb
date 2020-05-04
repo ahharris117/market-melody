@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_04_28_004106) do
 
   create_table "stocks", force: :cascade do |t|
     t.string "symbol", null: false
-    t.string "prices", null: false
+    t.json "prices", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

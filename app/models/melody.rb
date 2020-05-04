@@ -5,18 +5,18 @@ class Melody < ApplicationRecord
 
   def get_melody
     root_index = 11
-    index = stock.index
+    indices = stock.index
     note_array = scale.note_array
-    last_note = index.first
-    melody = index.map do |number|
+    last_note = indices.first
+    melody = indices.map do |index|
       if last_note > root_index
         diff = last_note - root_index
-        number = note_array[number - diff]
+        index = note_array[index - diff]
       elsif last_note < root_index
         diff = root_index - last_note
-        number = note_array[number + diff]
+        index = note_array[index + diff]
       else
-        number = note_array[number]
+        index = note_array[index]
       end
     end
     final_melody = melody.reverse()

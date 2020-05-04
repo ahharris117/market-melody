@@ -27,6 +27,7 @@ const Form = props => {
   }
   return(
     <form onSubmit={onSubmitHandler} className="callout">
+      <div>{props.error}</div>
       <label htmlFor="stock">
         Search for Companies:
         <input onChange={onChangeHandler} type="text" id="stock" value={formData.stock} />

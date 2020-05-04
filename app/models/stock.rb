@@ -4,30 +4,38 @@ class Stock < ApplicationRecord
   validates :symbol, presence: true
   validates :prices, presence: true
 
-  def integer_array
-    string_array = prices.split(' ')
-    price_array = string_array.map { |price| price.to_f }
+  def get_price_array
+    price_array = prices.map do |price_hash|
+      price_hash["price"].to_f
+    end
     return price_array
   end
 
-  def range
-    price_array = integer_array()
-    low_high_range = []
+  def get_date_array
+    date_array = prices.map do |price_hash|
+      price_hash["date"]
+    end
+    return date_array
+  end
+
+  def range_and_low
+    price_array = get_price_array()
+    low_range = []
     max = price_array.max
-    low_high_range << price_array.min
-    low_high_range << (max - low_high_range[0]) / 12
-    return low_high_range
+    low_range << price_array.min
+    low_range << (max - low_range[0]) / 12
+    return low_range
   end
 
   def index
-    low_high_range = range()
-    price_array = integer_array()
+    low_range = range_and_low()
+    price_array = get_price_array()
     index_array = price_array.map do |number|
-      if number - low_high_range[0] > 0
-        number = (number - low_high_range[0]) / low_high_range[1]
+      if number - low_range[0] > 0
+        number = (number - low_range[0]) / low_range[1]
         number.ceil
       else
-        number = (number - low_high_range[0] + 0.1) / low_high_range[1]
+        number = (number - low_range[0] + 0.1) / low_range[1]
         number.ceil
       end
     end
