@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Tone from 'tone'
 import StartAudioContext from 'startaudiocontext'
+import { Chart } from "react-google-charts";
 
 const Play = props => {
   const setup = () => {
@@ -10,7 +11,7 @@ const Play = props => {
     let synth;
     Tone.Transport.stop()
     Tone.Transport.cancel()
-    props.melody.melody.forEach((melodyNote) => {
+    props.melodyInfo.melody.forEach((melodyNote) => {
       noteArray.push({ time : noteTime, note : melodyNote, dur : '16n'})
       noteTime += 0.2
     })
@@ -30,14 +31,50 @@ const Play = props => {
     const part = new Tone.Part((time, event) => {
       synth.triggerAttackRelease(event.note, event.dur, time)
     }, noteArray)
-
     part.start(0);
     Tone.Transport.start()
   }
+
+  const chartData = () => {
+    const data = [];
+    if (props.melodyInfo.prices) {
+      let time = 35;
+      props.melodyInfo.prices.forEach((price) => {
+        let rowArray = [time, price]
+        time --
+        data.unshift(rowArray)
+      })
+      data.unshift(["Date", "Price"])
+      debugger;
+      return data
+    }
+  }
+
   return(
     <div className="play-container">
-      <i className="far fa-play-circle" onClick={setup}></i>
-      <div className="melody-title">{props.melody.name}</div>
+      <div className="play">
+        <i className="far fa-play-circle" onClick={setup}></i>
+        <div className="melody-title">{props.melodyInfo.name}</div>
+      </div>
+      <div className="chart-container">
+        <Chart
+          className="chart-box"
+          width={'400px'}
+          height={'300px'}
+          chartType="LineChart"
+          loader={<div>Loading Chart</div>}
+          data={chartData()}
+          options={{
+            hAxis: {
+              title: props.melodyInfo.interval,
+            },
+            vAxis: {
+              title: 'Prices',
+            },
+          }}
+          rootProps={{ 'data-testid': '1' }}
+        />
+      </div>
     </div>
   )
 }

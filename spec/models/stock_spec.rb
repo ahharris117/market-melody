@@ -40,7 +40,8 @@ RSpec.describe Stock, type: :model do
         {"date"=>"2019-09-20", "price"=>"142.5600"},
         {"date"=>"2019-09-13", "price"=>"140.5900"},
         {"date"=>"2019-09-06", "price"=>"134.8500"}],
-        name: "InternationalBM"
+        name: "InternationalBM",
+        interval: "Daily"
     )
   end
 
@@ -48,6 +49,8 @@ RSpec.describe Stock, type: :model do
   it { should validate_presence_of(:symbol) }
   it { should validate_presence_of(:prices) }
   it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:interval) }
+  it {should ensure_inclusion_of(:interval).in_array(%w([Weekly Monthly Daily])) }
 
   describe "#get_price_array" do
     it "returns an array of price values from prices json" do

@@ -90,27 +90,39 @@ h1 a  {
 }
 
 .play-container {
+  padding: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
   font-size: 1.5rem;
   margin: 30px auto;
-  width: 450px;
-  height: 100px;
+  width: 50%;
+  min-width: 410px;
+  padding: 1em 0;
   border: 2px solid var(--grey);
   border-radius: 10px;
   background-color: var(--darkblue);
-  .melody-title {
-    margin-left: 0.5em;
+  .chart-container > div {
+    margin: 15px auto;
   }
-  .far {
-    color: var(--aqua-neon);
-    font-size: 3rem;
-    margin: 10px;
-    transition: all .5s linear;
-    &:hover {
-      color: var(--red);
+  .play {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    .melody-title {
+      margin-left: 10px;
+    }
+    .far {
+      color: var(--aqua-neon);
+      font-size: 3rem;
+      margin: 10px;
+      transition: all .5s linear;
+      &:hover {
+        color: var(--red);
+      }
     }
   }
 }

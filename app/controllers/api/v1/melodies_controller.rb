@@ -27,6 +27,8 @@ class Api::V1::MelodiesController < ApplicationController
 
     if parsed_response["Error Message"]
       render json: { status: 'error', message: "Invalid symbol" }, status: 500
+    elsif parsed_response["Note"]
+      render json: { status: 'error', message: "Too many API calls" }, status: 500
     elsif parsed_response[series].length < 36
       render json: { status: 'error', message: "Not enough data, stock must have at least 36 data points" }, status: 500
     else
@@ -44,7 +46,7 @@ class Api::V1::MelodiesController < ApplicationController
         end
       end
 
-      stock = Stock.new(symbol: ticker_name, prices: stock_data, name: stock_name)
+      stock = Stock.new(symbol: ticker_name, prices: stock_data, name: stock_name, interval: params[:interval])
       @melody = Melody.new
       if user_signed_in?
         @melody.user = current_user
@@ -52,7 +54,13 @@ class Api::V1::MelodiesController < ApplicationController
 
       @melody.stock = stock
       @melody.scale = Scale.find_by(name: params[:scale])
-      render json: { melody: @melody.get_melody, name: @melody.get_name }
+      render json: {
+        melody: @melody.get_melody,
+        name: @melody.get_name,
+        dates: stock.get_date_array,
+        prices: stock.get_price_array,
+        interval: stock.interval
+      }
     end
   end
 
