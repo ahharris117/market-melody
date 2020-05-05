@@ -22,4 +22,8 @@ class Melody < ApplicationRecord
     final_melody = melody.reverse()
     return final_melody
   end
+
+  def get_name
+    return "#{stock.symbol.upcase} in #{scale.name}"
+  end
 end

@@ -26,25 +26,23 @@ const Form = props => {
     props.submitForm(formData)
   }
   return(
-    <form onSubmit={onSubmitHandler} className="callout">
-      <div>{props.error}</div>
+    <form onSubmit={onSubmitHandler} className="form callout">
       <label htmlFor="stock">
-        Search for Companies:
+        Search for Companies
         <input onChange={onChangeHandler} type="text" id="stock" value={formData.stock} />
       </label>
 
       <div className="select">
         <label>
-          Scale:
+          Scale
           <select id="scale" value={formData.scale} onChange={onChangeHandler}>
             <option></option>
             {scaleNames}
           </select>
         </label>
       </div>
-
-      <div className="button-group">
-        <button className="button">Clear</button>
+      <div>{props.error}</div>
+      <div className="button-group float-right">
         <input className="button" type="submit" value="Submit" />
       </div>
     </form>

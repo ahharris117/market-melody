@@ -38,7 +38,7 @@ class Api::V1::MelodiesController < ApplicationController
 
       @melody.stock = stock
       @melody.scale = Scale.find_by(name: params[:scale])
-      render json: @melody.get_melody
+      render json: { melody: @melody.get_melody, name: @melody.get_name }
     end
   end
 
