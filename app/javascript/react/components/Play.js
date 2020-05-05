@@ -10,7 +10,7 @@ const Play = props => {
     let synth;
     Tone.Transport.stop()
     Tone.Transport.cancel()
-    props.melody.forEach((melodyNote) => {
+    props.melody.melody.forEach((melodyNote) => {
       noteArray.push({ time : noteTime, note : melodyNote, dur : '16n'})
       noteTime += 0.2
     })
@@ -37,7 +37,10 @@ const Play = props => {
     Tone.Transport.start()
   }
   return(
-    <div onClick={setup}>Hello</div>
+    <div className="play-container">
+      <i className="far fa-play-circle" onClick={setup}></i>
+      <div className="melody-title">{props.melody.name}</div>
+    </div>
   )
 }
 

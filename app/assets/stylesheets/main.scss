@@ -4,17 +4,18 @@
   --grey: #3a506b;
   --aqua: #5bc0be;
   --aqua-neon: #6fffe9;
+  --red: #f45b69
 }
 
 body {
   background-color: var(--black);
   color: var(--aqua);
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 a {
   color: var(--aqua-neon);
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .main-image {
@@ -22,6 +23,9 @@ a {
   width: 100%
 }
 
+h1 a  {
+  font-family: 'Roboto Slab', serif;
+}
 .navbar {
   background-color: var(--black);
 }
@@ -58,4 +62,52 @@ a {
   position: absolute;
   right: 7em;
   bottom: 20em;
+}
+
+.form-container {
+  background-color: var(--grey);
+  padding-top: 10px;
+  padding-bottom: 50px;
+  .form {
+    font-size: 0.9rem;
+    border: none;
+    background-color: var(--grey);
+    width: 50%;
+    margin: 0 auto;
+    color: white;
+    label {
+      font-size: .9rem;
+      color: white;
+    }
+  }
+}
+
+.button {
+  background-color: var(--darkblue);
+}
+
+.play-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+  margin: 30px auto;
+  width: 450px;
+  height: 100px;
+  border: 2px solid var(--grey);
+  border-radius: 10px;
+  background-color: var(--darkblue);
+  .melody-title {
+    margin-left: 0.5em;
+  }
+  .far {
+    color: var(--aqua-neon);
+    font-size: 3rem;
+    margin: 10px;
+    transition: all .5s linear;
+    &:hover {
+      color: var(--red);
+    }
+  }
 }

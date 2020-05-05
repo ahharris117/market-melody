@@ -4,7 +4,10 @@ import Play from './Play'
 
 const FormContainer = props => {
   const [ scales, setScales ] = useState([])
-  const [ melody, setMelody ] = useState()
+  const [ melody, setMelody ] = useState({
+    melody: "",
+    name: ""
+  })
   const [ showPlay, shouldShowPlay ] = useState(false)
   const [ errorMessage, setErrorMessage ] = useState("")
   useEffect(() => {
@@ -63,8 +66,10 @@ const FormContainer = props => {
   }
   return(
     <div>
-     <Form scales={scales} error={errorMessage} submitForm={submitForm} />
-     {playComponent}
+      <div className="form-container">
+        <Form scales={scales} error={errorMessage} submitForm={submitForm} />
+      </div>
+      {playComponent}
     </div>
   )
 }
