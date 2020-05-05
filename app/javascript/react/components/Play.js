@@ -15,8 +15,6 @@ const Play = props => {
       noteTime += 0.2
     })
 
-    console.log(noteArray.length);
-
     synth = new Tone.Synth({
       oscillator: {
         type: 'triangle8'

@@ -39,13 +39,15 @@ RSpec.describe Stock, type: :model do
         {"date"=>"2019-09-27", "price"=>"141.1900"},
         {"date"=>"2019-09-20", "price"=>"142.5600"},
         {"date"=>"2019-09-13", "price"=>"140.5900"},
-        {"date"=>"2019-09-06", "price"=>"134.8500"}]
+        {"date"=>"2019-09-06", "price"=>"134.8500"}],
+        name: "InternationalBM"
     )
   end
-  
+
   it { should have_one(:melody) }
   it { should validate_presence_of(:symbol) }
   it { should validate_presence_of(:prices) }
+  it { should validate_presence_of(:name) }
 
   describe "#get_price_array" do
     it "returns an array of price values from prices json" do
