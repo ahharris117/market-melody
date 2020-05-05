@@ -3,6 +3,7 @@ class Stock < ApplicationRecord
 
   validates :symbol, presence: true
   validates :prices, presence: true
+  validates :name, presence: true
 
   def get_price_array
     price_array = prices.map do |price_hash|

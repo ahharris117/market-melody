@@ -30,10 +30,10 @@ const FormContainer = props => {
   }, [])
 
   const submitForm = (formPayload) => {
-    fetch('/api/v1/melodies' , {
+    const { stock, scale, interval } = formPayload
+    fetch(`/api/v1/melodies?stock=${stock}&scale=${scale}&interval=${interval}` , {
       credentials: "same-origin",
-      method: "POST",
-      body: JSON.stringify(formPayload),
+      method: "GET",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"

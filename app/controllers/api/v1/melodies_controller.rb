@@ -4,21 +4,35 @@ class Api::V1::MelodiesController < ApplicationController
   protect_from_forgery with: :null_session
   protect_from_forgery unless: -> { request.format.json? }
 
-  def create
+  def index
     secret_key = ENV["api_key"]
-    ticker_name = params[:stock]
-    url = "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=#{ticker_name}&apikey=#{secret_key}"
+
+    stock_info = params[:stock].split(' - ')
+    ticker_name = stock_info[0]
+    stock_name = stock_info[1]
+    url = ""
+    series = ""
+    if params[:interval] == "Weekly"
+      series = "Weekly Time Series"
+      url = "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=#{ticker_name}&apikey=#{secret_key}"
+    elsif params[:interval] == "Daily"
+      series = "Time Series (Daily)"
+      url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=#{ticker_name}&apikey=#{secret_key}"
+    else
+      series = "Monthly Time Series"
+      url = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=#{ticker_name}&apikey=#{secret_key}"
+    end
     api_response = Faraday.get(url)
     parsed_response = JSON.parse(api_response.body)
 
     if parsed_response["Error Message"]
       render json: { status: 'error', message: "Invalid symbol" }, status: 500
-    elsif parsed_response["Weekly Time Series"].length < 36
+    elsif parsed_response[series].length < 36
       render json: { status: 'error', message: "Not enough data, stock must have at least 36 data points" }, status: 500
     else
       stock_data = []
       counter = 1
-      parsed_response["Weekly Time Series"].each do |key, value|
+      parsed_response[series].each do |key, value|
         if counter <= 36
           stock_data.push({
             "date" => key,
@@ -30,7 +44,7 @@ class Api::V1::MelodiesController < ApplicationController
         end
       end
 
-      stock = Stock.create(symbol: params[:stock], prices: stock_data)
+      stock = Stock.new(symbol: ticker_name, prices: stock_data, name: stock_name)
       @melody = Melody.new
       if user_signed_in?
         @melody.user = current_user

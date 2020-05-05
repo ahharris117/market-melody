@@ -46,7 +46,8 @@ RSpec.describe Melody, type: :model do
           {"date"=>"2019-09-27", "price"=>"141.1900"},
           {"date"=>"2019-09-20", "price"=>"142.5600"},
           {"date"=>"2019-09-13", "price"=>"140.5900"},
-          {"date"=>"2019-09-06", "price"=>"134.8500"}]
+          {"date"=>"2019-09-06", "price"=>"134.8500"}],
+          name: "InternationalBM"
       )
       melody = Melody.create(user: user, scale: scale, stock: stock)
 
