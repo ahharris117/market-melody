@@ -50,7 +50,7 @@ RSpec.describe Stock, type: :model do
   it { should validate_presence_of(:prices) }
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:interval) }
-  it {should ensure_inclusion_of(:interval).in_array(%w([Weekly Monthly Daily])) }
+  it {should validate_inclusion_of(:interval).in_array(%w(Weekly Monthly Daily)) }
 
   describe "#get_price_array" do
     it "returns an array of price values from prices json" do
