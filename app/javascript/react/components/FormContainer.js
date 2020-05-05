@@ -4,9 +4,11 @@ import Play from './Play'
 
 const FormContainer = props => {
   const [ scales, setScales ] = useState([])
-  const [ melody, setMelody ] = useState({
+  const [ melodyInfo, setMelodyInfo ] = useState({
     melody: "",
-    name: ""
+    name: "",
+    dates: "",
+    prices: ""
   })
   const [ showPlay, shouldShowPlay ] = useState(false)
   const [ errorMessage, setErrorMessage ] = useState("")
@@ -52,7 +54,7 @@ const FormContainer = props => {
         throw new Error(response.message)
       }
       setErrorMessage("")
-      setMelody(response)
+      setMelodyInfo(response)
     })
     .catch((error) => {
       setErrorMessage(error.message)
@@ -60,7 +62,7 @@ const FormContainer = props => {
   }
   let playComponent;
   if (showPlay === true) {
-    playComponent = <Play melody={melody} />
+    playComponent = <Play melodyInfo={melodyInfo} />
   } else {
     playComponent = ""
   }

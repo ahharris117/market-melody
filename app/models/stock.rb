@@ -4,6 +4,8 @@ class Stock < ApplicationRecord
   validates :symbol, presence: true
   validates :prices, presence: true
   validates :name, presence: true
+  validates :interval, presence: true , inclusion: { in: %w(Weekly Monthly Daily),
+    message: "is not included in the list" }
 
   def get_price_array
     price_array = prices.map do |price_hash|
