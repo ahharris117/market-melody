@@ -59,12 +59,35 @@ class Api::V1::MelodiesController < ApplicationController
         name: @melody.get_name,
         dates: stock.get_date_array,
         prices: stock.get_price_array,
-        interval: stock.interval
+        interval: stock.interval,
+        user: current_user,
+        fullMelody: @melody,
+        stock: stock
       }
     end
   end
 
+  def create
+    params.permit!
+    melody = Melody.new(params[:fullMelody])
+    stock = Stock.new(params[:stock])
+    melody.stock = stock
+    melody.save
+    stock.save
+    response = melody.id
+    render json: response
+  end
+
   def show
     melody = Melody.find(params[:id])
+    stock = melody.stock
+    render json: {
+      name: melody.get_name,
+      melody: melody.get_melody,
+      stock: stock,
+      prices: stock.get_price_array,
+      dates: stock.get_date_array,
+      user: current_user,
+    }
   end
 end

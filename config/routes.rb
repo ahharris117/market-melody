@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :melodies, only: [:index, :create]
+      resources :melodies, only: [:index, :create, :show]
       resources :scales, only: [:index]
       resources :stocks, only: [:index]
     end
