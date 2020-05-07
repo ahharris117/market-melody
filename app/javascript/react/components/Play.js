@@ -2,38 +2,8 @@ import React, { useState } from 'react'
 import Tone from 'tone'
 import StartAudioContext from 'startaudiocontext'
 import { Chart } from "react-google-charts";
-
+import MelodyPlayer from './MelodyPlayer'
 const Play = props => {
-  const setup = () => {
-    let noteArray = []
-    let noteTime = 0
-    let melody_one;
-    let synth;
-    Tone.Transport.stop()
-    Tone.Transport.cancel()
-    props.melodyInfo.melody.forEach((melodyNote) => {
-      noteArray.push({ time : noteTime, note : melodyNote, dur : '16n'})
-      noteTime += 0.2
-    })
-
-    synth = new Tone.Synth({
-      oscillator: {
-        type: 'triangle8'
-      },
-      envelope: {
-        attack: 2,
-        decay: 1,
-        sustain: 2,
-        release: 4
-      }
-    }).toMaster()
-
-    const part = new Tone.Part((time, event) => {
-      synth.triggerAttackRelease(event.note, event.dur, time)
-    }, noteArray)
-    part.start(0);
-    Tone.Transport.start()
-  }
 
   const chartData = () => {
     const data = [];
@@ -45,17 +15,27 @@ const Play = props => {
         data.unshift(rowArray)
       })
       data.unshift(["Date", "Price"])
-      debugger;
       return data
     }
   }
 
+  const handleSave = (event) => {
+    event.preventDefault()
+    props.saveMelody()
+  }
+  let saveButton = ""
+  if (props.melodyInfo.user) {
+    saveButton = (
+      <button className="save button" onClick={handleSave}>Save Melody</button>
+    )
+  }
   return(
     <div className="play-container">
-      <div className="play">
-        <i className="far fa-play-circle" onClick={setup}></i>
-        <div className="melody-title">{props.melodyInfo.name}</div>
-      </div>
+      <MelodyPlayer
+        class="play"
+        melody={props.melodyInfo.melody}
+        name={props.melodyInfo.name}
+      />
       <div className="chart-container">
         <Chart
           className="chart-box"
@@ -75,6 +55,7 @@ const Play = props => {
           rootProps={{ 'data-testid': '1' }}
         />
       </div>
+      {saveButton}
     </div>
   )
 }

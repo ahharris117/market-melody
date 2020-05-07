@@ -126,3 +126,27 @@ h1 a  {
     }
   }
 }
+
+.show {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--darkblue);
+  text-align: center;
+  .chart-box{
+    margin: 15px auto;
+  }
+  .show-info {
+    color: white;
+    margin-top: 40px;
+  }
+  .show-title {
+    color: var(--aqua-neon);
+    margin: 20px;
+  }
+}
+
+.save {
+  background-color: var(--grey);
+}

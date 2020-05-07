@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import Form from './form'
 import Play from './Play'
 
@@ -8,10 +9,17 @@ const FormContainer = props => {
     melody: "",
     name: "",
     dates: "",
-    prices: ""
+    prices: "",
+    interval: "",
+    fullMelody: "",
+    user: "",
+    stock: ""
   })
   const [ showPlay, shouldShowPlay ] = useState(false)
   const [ errorMessage, setErrorMessage ] = useState("")
+  const [ showId, setShowId ] = useState("")
+  const [ shouldRedirect, setShouldRedirect ] = useState(false)
+
   useEffect(() => {
     fetch('/api/v1/scales')
     .then((response) => {
@@ -60,16 +68,45 @@ const FormContainer = props => {
       setErrorMessage(error.message)
     })
   }
+
+  const saveMelody = () => {
+    fetch('/api/v1/melodies' , {
+      credentials: "same-origin",
+      method: "POST",
+      body: JSON.stringify({
+        fullMelody: melodyInfo.fullMelody,
+        user: melodyInfo.user,
+        stock: melodyInfo.stock
+      }),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((body) => {
+      setShowId(body)
+      setShouldRedirect(true)
+    })
+  }
+
+  if (shouldRedirect) {
+    return <Redirect to={`/melodies/${showId}`} />
+  }
+
   let playComponent;
   if (showPlay === true) {
-    playComponent = <Play melodyInfo={melodyInfo} />
+    playComponent = <Play melodyInfo={melodyInfo} saveMelody={saveMelody} />
   } else {
     playComponent = ""
   }
+
   return(
     <div>
       <div className="form-container">
-        <Form scales={scales} error={errorMessage} submitForm={submitForm} />
+        <Form scales={scales} error={errorMessage} submitForm={submitForm} user/>
       </div>
       {playComponent}
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import FormSelect from './FormSelect'
 const Form = props => {
   const [formData, setFormData] = useState({
     stock: "",
@@ -10,21 +10,10 @@ const Form = props => {
 
   let intervals = ["Daily", "Weekly", "Monthly"]
 
-  let intervalOptions = intervals.map((interval) => {
-    return(
-      <option key={interval}>
-        {interval}
-      </option>
-    )
+  let scaleOptionNames = props.scales.map((scale) => {
+    return scale.name
   })
-
-  let scaleNames = props.scales.map((scale) => {
-    return(
-      <option key={scale.id}>
-        {scale.name}
-      </option>
-    )
-  })
+  
 
   let stockOptions = ""
   if (matches.length > 0) {
@@ -81,10 +70,7 @@ const Form = props => {
     event.preventDefault()
     props.submitForm(formData)
   }
-  // <label htmlFor="stock">
-  //   Search for Companies
-  //   <input onChange={onChangeHandler} type="text" id="stock" value={formData.stock} />
-  // </label>
+
   return(
     <form onSubmit={onSubmitHandler} className="form callout">
       <div className="datalist">
@@ -97,33 +83,26 @@ const Form = props => {
           <p className="help-text">Select from autofill options</p>
         </label>
       </div>
+      <FormSelect
+        label="Scale"
+        array={scaleOptionNames}
+        id="scale"
+        value={formData.scale}
+        onChangeHandler={onChangeHandler}
+      />
 
-      <div className="select">
-        <label>
-          Scale
-          <select id="scale" value={formData.scale} onChange={onChangeHandler}>
-            <option></option>
-            {scaleNames}
-          </select>
-        </label>
-      </div>
-
-      <div className="select">
-        <label>
-          Interval
-          <select id="interval" value={formData.interval} onChange={onChangeHandler}>
-            <option></option>
-            {intervalOptions}
-          </select>
-        </label>
-      </div>
+      <FormSelect
+        label="Interval"
+        array={intervals}
+        id="interval"
+        value={formData.interval}
+        onChangeHandler={onChangeHandler}
+      />
       <div>{props.error}</div>
       <div className="button-group float-right">
         <input className="button" type="submit" value="Submit" />
       </div>
     </form>
-
-
   )
 }
 
