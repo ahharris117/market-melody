@@ -87,7 +87,25 @@ class Api::V1::MelodiesController < ApplicationController
       stock: stock,
       prices: stock.get_price_array,
       dates: stock.get_date_array,
-      user: current_user,
+      user: melody.user,
+      current_user: current_user
+    }
+  end
+
+  def destroy
+    melody = Melody.find(params[:id])
+    melody.delete
+    render json: {}, status: :no_content
+  end
+
+  def update
+    melody = Melody.find(params[:id])
+    scale = Scale.find_by(name: params[:scale])
+    melody.scale = scale
+    melody.save
+    render json: {
+      name: melody.get_name,
+      melody: melody.get_melody
     }
   end
 end
