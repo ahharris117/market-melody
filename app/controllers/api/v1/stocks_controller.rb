@@ -15,5 +15,4 @@ class Api::V1::StocksController < ApplicationController
 
     render json: parsed_response
   end
-
 end

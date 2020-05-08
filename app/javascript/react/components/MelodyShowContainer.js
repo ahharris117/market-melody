@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Chart } from "react-google-charts";
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import MelodyPlayer from './MelodyPlayer'
 import FormSelect from './FormSelect'
 import EditForm from './EditForm'
@@ -137,7 +137,7 @@ const MelodyShowContainer = (props) => {
     <div className="show">
       <div className="show-title">
         <h3>{melodyInfo.name}</h3>
-        <h5>By {user.username}</h5>
+        <Link to={`/users/${user.id}`}><h5>By {user.username}</h5></Link>
       </div>
       <Chart
         className="chart-box"
