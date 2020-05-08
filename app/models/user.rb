@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  mount_uploader :profile_photo, ProfilePhotoUploader
+
   has_many :melodies
 
   validates :username, presence: true, uniqueness: true
