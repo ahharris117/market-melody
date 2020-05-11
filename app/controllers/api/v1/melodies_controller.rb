@@ -6,7 +6,6 @@ class Api::V1::MelodiesController < ApplicationController
 
   def index
     secret_key = ENV["api_key"]
-
     stock_info = params[:stock].split(' - ')
     ticker_name = stock_info[0]
     stock_name = stock_info[1]
@@ -54,6 +53,7 @@ class Api::V1::MelodiesController < ApplicationController
 
       @melody.stock = stock
       @melody.scale = Scale.find_by(name: params[:scale])
+
       if stock.valid?
         render json: {
           melody: @melody.get_melody,

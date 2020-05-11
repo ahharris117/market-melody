@@ -1,5 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'vcr'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -62,4 +63,21 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+
+  VCR.configure do |config|
+    config.allow_http_connections_when_no_cassette = false
+    config.cassette_library_dir = File.expand_path('cassettes', __dir__)
+    config.hook_into :faraday
+    config.ignore_localhost = true
+    config.default_cassette_options = {
+      record: :new_episodes
+    }
+    config.filter_sensitive_data('<api_key>') { ENV['api_key'] }
+  end
+end
+
+RSpec.configure do |config|
+  # allows test user to sign in
+  config.include Devise::Test::IntegrationHelpers, type: :request
 end
