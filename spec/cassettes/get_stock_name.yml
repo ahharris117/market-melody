@@ -1,0 +1,154 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.alphavantage.co/query?apikey=<api_key>&function=SYMBOL_SEARCH&keywords=B
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      connection:
+      - keep-alive
+      server:
+      - gunicorn/19.7.0
+      date:
+      - Mon, 11 May 2020 19:15:47 GMT
+      transfer-encoding:
+      - chunked
+      x-frame-options:
+      - SAMEORIGIN
+      vary:
+      - Cookie
+      content-type:
+      - application/json
+      allow:
+      - GET, HEAD, OPTIONS
+      via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "bestMatches": [
+                {
+                    "1. symbol": "B",
+                    "2. name": "Barnes Group Inc.",
+                    "3. type": "Equity",
+                    "4. region": "United States",
+                    "5. marketOpen": "09:30",
+                    "6. marketClose": "16:00",
+                    "7. timezone": "UTC-05",
+                    "8. currency": "USD",
+                    "9. matchScore": "1.0000"
+                },
+                {
+                    "1. symbol": "BA",
+                    "2. name": "The Boeing Company",
+                    "3. type": "Equity",
+                    "4. region": "United States",
+                    "5. marketOpen": "09:30",
+                    "6. marketClose": "16:00",
+                    "7. timezone": "UTC-05",
+                    "8. currency": "USD",
+                    "9. matchScore": "0.6667"
+                },
+                {
+                    "1. symbol": "BMRA",
+                    "2. name": "Biomerica Inc.",
+                    "3. type": "Equity",
+                    "4. region": "United States",
+                    "5. marketOpen": "09:30",
+                    "6. marketClose": "16:00",
+                    "7. timezone": "UTC-05",
+                    "8. currency": "USD",
+                    "9. matchScore": "0.6667"
+                },
+                {
+                    "1. symbol": "APRN",
+                    "2. name": "Blue Apron Holdings Inc.",
+                    "3. type": "Equity",
+                    "4. region": "United States",
+                    "5. marketOpen": "09:30",
+                    "6. marketClose": "16:00",
+                    "7. timezone": "UTC-05",
+                    "8. currency": "USD",
+                    "9. matchScore": "0.5000"
+                },
+                {
+                    "1. symbol": "BAC",
+                    "2. name": "Bank of America Corporation",
+                    "3. type": "Equity",
+                    "4. region": "United States",
+                    "5. marketOpen": "09:30",
+                    "6. marketClose": "16:00",
+                    "7. timezone": "UTC-05",
+                    "8. currency": "USD",
+                    "9. matchScore": "0.4000"
+                },
+                {
+                    "1. symbol": "BP",
+                    "2. name": "BP p.l.c.",
+                    "3. type": "Equity",
+                    "4. region": "United States",
+                    "5. marketOpen": "09:30",
+                    "6. marketClose": "16:00",
+                    "7. timezone": "UTC-05",
+                    "8. currency": "USD",
+                    "9. matchScore": "0.4000"
+                },
+                {
+                    "1. symbol": "BABA",
+                    "2. name": "Alibaba Group Holding Limited",
+                    "3. type": "Equity",
+                    "4. region": "United States",
+                    "5. marketOpen": "09:30",
+                    "6. marketClose": "16:00",
+                    "7. timezone": "UTC-05",
+                    "8. currency": "USD",
+                    "9. matchScore": "0.4000"
+                },
+                {
+                    "1. symbol": "BRK-B",
+                    "2. name": "Berkshire Hathaway Inc.",
+                    "3. type": "Equity",
+                    "4. region": "United States",
+                    "5. marketOpen": "09:30",
+                    "6. marketClose": "16:00",
+                    "7. timezone": "UTC-05",
+                    "8. currency": "USD",
+                    "9. matchScore": "0.3333"
+                },
+                {
+                    "1. symbol": "BNTX",
+                    "2. name": "BioNTech SE",
+                    "3. type": "Equity",
+                    "4. region": "United States",
+                    "5. marketOpen": "09:30",
+                    "6. marketClose": "16:00",
+                    "7. timezone": "UTC-05",
+                    "8. currency": "USD",
+                    "9. matchScore": "0.1429"
+                },
+                {
+                    "1. symbol": "AVGO",
+                    "2. name": "Broadcom Inc.",
+                    "3. type": "Equity",
+                    "4. region": "United States",
+                    "5. marketOpen": "09:30",
+                    "6. marketClose": "16:00",
+                    "7. timezone": "UTC-05",
+                    "8. currency": "USD",
+                    "9. matchScore": "0.0769"
+                }
+            ]
+        }
+    http_version: null
+  recorded_at: Mon, 11 May 2020 19:15:47 GMT
+recorded_with: VCR 5.1.0
