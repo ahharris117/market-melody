@@ -50,16 +50,14 @@ const FormContainer = props => {
       }
     })
     .then((response) => {
-      if (response.status === 200) {
-        shouldShowPlay(true)
-      } else {
-        shouldShowPlay(false)
-      }
       return response.json()
     })
     .then((response) => {
       if (response.status === 'error') {
         throw new Error(response.message)
+        shouldShowPlay(false)
+      } else {
+        shouldShowPlay(true)
       }
       setErrorMessage("")
       setMelodyInfo(response)

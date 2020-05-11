@@ -54,16 +54,24 @@ class Api::V1::MelodiesController < ApplicationController
 
       @melody.stock = stock
       @melody.scale = Scale.find_by(name: params[:scale])
-      render json: {
-        melody: @melody.get_melody,
-        name: @melody.get_name,
-        dates: stock.get_date_array,
-        prices: stock.get_price_array,
-        interval: stock.interval,
-        user: current_user,
-        fullMelody: @melody,
-        stock: stock
-      }
+      if stock.valid?
+        render json: {
+          melody: @melody.get_melody,
+          name: @melody.get_name,
+          dates: stock.get_date_array,
+          prices: stock.get_price_array,
+          interval: stock.interval,
+          user: current_user,
+          fullMelody: @melody,
+          stock: stock
+        }
+      else
+        render json: {
+          status: "error",
+          message: "Please select stock from dropdown menu",
+          code: 404
+        }
+      end
     end
   end
 

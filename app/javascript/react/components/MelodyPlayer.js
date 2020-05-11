@@ -35,8 +35,8 @@ const MelodyPlayer = props => {
   }
 
   return(
-    <div className={props.class}>
-      <i className="far fa-play-circle" onClick={playMelody}></i>
+    <div className={props.classStyle}>
+      <i className="play-icon far fa-play-circle" onClick={playMelody}></i>
       <div className="melody-title">{props.name}</div>
     </div>
   )

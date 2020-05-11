@@ -8,12 +8,16 @@ const FormSelect = props => {
       </option>
     )
   })
+  let initialValue = ( <option></option> )
+  if (props.includeEmptyValue === false) {
+    initialValue = ""
+  }
   return(
     <div className="select">
       <label>
         {props.label}
         <select id={props.id} value={props.value} onChange={props.onChangeHandler}>
-          <option></option>
+          {initialValue}
           {optionList}
         </select>
       </label>

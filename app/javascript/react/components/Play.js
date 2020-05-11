@@ -32,7 +32,7 @@ const Play = props => {
   return(
     <div className="play-container">
       <MelodyPlayer
-        class="play"
+        clasStyle="play"
         melody={props.melodyInfo.melody}
         name={props.melodyInfo.name}
       />
@@ -51,6 +51,8 @@ const Play = props => {
             vAxis: {
               title: 'Prices',
             },
+            colors: ['#6fffe9'],
+            backgroundColor: '#0b132b'
           }}
           rootProps={{ 'data-testid': '1' }}
         />

@@ -2,6 +2,7 @@ class Melody < ApplicationRecord
   belongs_to :user
   belongs_to :scale
   belongs_to :stock
+  has_many :likes
 
   def get_melody
     root_index = 11

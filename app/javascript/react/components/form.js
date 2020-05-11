@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import FormSelect from './FormSelect'
+import ErrorList from './ErrorList'
+
 const Form = props => {
   const [formData, setFormData] = useState({
     stock: "",
@@ -7,13 +9,14 @@ const Form = props => {
     interval: ""
   })
   const [ matches, setMatches ] = useState([])
+  const [ errors, setErrors ] = useState({})
 
   let intervals = ["Daily", "Weekly", "Monthly"]
 
   let scaleOptionNames = props.scales.map((scale) => {
     return scale.name
   })
-  
+
 
   let stockOptions = ""
   if (matches.length > 0) {
@@ -66,13 +69,30 @@ const Form = props => {
     setFormData()
   }
 
+  const validateForm = () => {
+    let submitErrors = {}
+    const requiredFields = ["stock", "scale", "interval"]
+    requiredFields.forEach((field) => {
+      if (formData[field].trim() === "") {
+        submitErrors = {
+          ...submitErrors,
+          [field]: "can't be blank"
+        }
+      }
+    })
+    setErrors(submitErrors)
+    return _.isEmpty(submitErrors)
+  }
   const onSubmitHandler = event => {
     event.preventDefault()
-    props.submitForm(formData)
+    if (validateForm()) {
+      props.submitForm(formData)
+    }
   }
 
   return(
     <form onSubmit={onSubmitHandler} className="form callout">
+      <ErrorList errors={errors} />
       <div className="datalist">
         <label htmlFor="stock">Stock Symbol
           <input type="text" id="stock" onChange={symbolChangeHandler} list="data" value={formData.stock} />

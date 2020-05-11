@@ -3,6 +3,37 @@ import { Link } from 'react-router-dom'
 import Soundwave from 'images/soundwave.jpg'
 import HomeLink from './homelink'
 const Home = props => {
+  const [ currentUser, setCurrentUser ] = useState(false)
+
+  useEffect(() => {
+    fetch('/api/v1/users' , {
+      credentials: "same-origin",
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((body) => {
+      if (body !== null) {
+        setCurrentUser(body)
+      }
+    })
+  }, [])
+
+  let homeLink = ""
+  if (currentUser === false) {
+    homeLink = (
+      <HomeLink text="Sign up" link={'/users/sign_up'} />
+    )
+  } else {
+    homeLink = (
+      <HomeLink text="Profile" link={`/users/${currentUser.user.id}`} />
+    )
+  }
   return(
     <div>
       <div>
@@ -12,8 +43,8 @@ const Home = props => {
       <div className="grid-container">
         <div className="grid-margin-x grid-x">
           <HomeLink text="Create" link={"/melodies/new"}/>
-          <HomeLink text="Sign up" />
-          <HomeLink text="Featured" link={"melodies/1"} />
+          {homeLink}
+          <HomeLink text="The Feed" link={"/melodies"} />
         </div>
       </div>
     </div>
