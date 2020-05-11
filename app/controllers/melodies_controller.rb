@@ -1,4 +1,7 @@
 class MelodiesController < ApplicationController
+  def index
+  end
+
   def show
   end
 

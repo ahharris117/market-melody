@@ -137,7 +137,7 @@ const MelodyShowContainer = (props) => {
     <div className="show">
       <div className="show-title">
         <h3>{melodyInfo.name}</h3>
-        <Link to={`/users/${user.id}`}><h5>By {user.username}</h5></Link>
+        <h5>by <Link to={`/users/${user.id}`}>{user.username}</Link></h5>
       </div>
       <Chart
         className="chart-box"
@@ -148,11 +148,13 @@ const MelodyShowContainer = (props) => {
         data={chartData()}
         options={{
           hAxis: {
-            title: interval,
+            title: interval
           },
           vAxis: {
-            title: 'Prices',
+            title: 'Prices'
           },
+          colors: ['#6fffe9'],
+          backgroundColor: '#0b132b'
         }}
         rootProps={{ 'data-testid': '1' }}
       />
@@ -162,7 +164,7 @@ const MelodyShowContainer = (props) => {
         <div>Time interval: {interval}</div>
       </div>
       <div className="play-container">
-        <MelodyPlayer class="play" name={melodyInfo.name} melody={melodyInfo.melody} />
+        <MelodyPlayer classStyle="play" name={melodyInfo.name} melody={melodyInfo.melody} />
       </div>
       <div className="show-bottom">
         <div>
@@ -170,6 +172,10 @@ const MelodyShowContainer = (props) => {
         </div>
         {editButton}
         {deleteButton}
+      </div>
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/melodies/new">Create</Link>
       </div>
     </div>
   )
