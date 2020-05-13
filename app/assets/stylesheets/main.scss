@@ -26,8 +26,11 @@ body {
   fill: white;
 }
 
-.google-visualization-tooltip text {
-  fill: black;
+.google-visualization-tooltip {
+  color: black;
+  text-align: left;
+  width: 110px;
+  padding: 5px !important;
 }
 
 a {
@@ -375,5 +378,13 @@ h3 h1 {
   }
   .fas {
     margin-right: 10px;
+  }
+}
+
+.modal-content {
+  background-color: var(--darkblue);
+  color: white;
+  .close {
+    color: white;
   }
 }

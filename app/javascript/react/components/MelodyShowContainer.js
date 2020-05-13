@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button'
 import MelodyPlayer from './MelodyPlayer'
 import FormSelect from './FormSelect'
 import EditForm from './EditForm'
+import DeleteModal from './DeleteModal'
+import MelodyModal from './MelodyModal'
 const MelodyShowContainer = (props) => {
   const [ melodyInfo, setMelodyInfo ] = useState({})
   const [ user, setUser ] = useState({})
@@ -12,6 +14,8 @@ const MelodyShowContainer = (props) => {
   const [ currentUser, setCurrentUser ] = useState({})
   const [ redirect, shouldRedirect ] = useState(false)
   const [ scaleForm, setScaleForm ] = useState("")
+  const [ deleteModalShow, setDeleteModalShow ] = useState(false)
+  const [ melodyModalShow, setMelodyModalShow ] = useState(false)
   useEffect(() => {
     let id = props.match.params.id
     fetch(`/api/v1/melodies/${id}`)
@@ -42,15 +46,24 @@ const MelodyShowContainer = (props) => {
     })
   }, [])
 
+  const parseDate = dateObject => {
+    return `${dateObject.getMonth() + 1}/${dateObject.getDate()}/${dateObject.getFullYear()}`
+  }
+
   const chartData = () => {
     const data = [];
     if (stockInfo.prices) {
       let time = 35;
       stockInfo.prices.forEach((price, index) => {
-        let rowArray = [new Date(stockInfo.dates[index]), price]
+        let rowArray = [
+          new Date(stockInfo.dates[index]),
+          price,
+          `<strong>Date:</strong> ${parseDate(new Date(stockInfo.dates[index]))}<br/><strong>Price:</strong> $${price}<br/><strong>Note:</strong> ${melodyInfo.melody[time]}`
+        ];
         data.unshift(rowArray)
+        time--
       })
-      data.unshift(["Date", "Price"])
+      data.unshift(["Date", "Price", { type: "string", role: "tooltip", p: { html: true }}])
       return data
     }
   }
@@ -66,10 +79,20 @@ const MelodyShowContainer = (props) => {
     name = stockInfo.stock.name
   }
 
-  const confirmDelete = () => {
-    let confirmMessage = confirm("Do you want to delete this item?")
-    if (confirmMessage === true) {
-      deleteMelody()
+
+  const showModal = (event) => {
+    if (event.currentTarget.id === "delete") {
+      setDeleteModalShow(true)
+    } else {
+      setMelodyModalShow(true)
+    }
+  }
+
+  const hideModal = (modal) => {
+    if (modal === "delete") {
+      setDeleteModalShow(false)
+    } else {
+      setMelodyModalShow(false)
     }
   }
 
@@ -130,12 +153,22 @@ const MelodyShowContainer = (props) => {
         <Button className="button" onClick={renderScaleOptions}>Change Scale</Button>
       )
       deleteButton = (
-        <Button className="delete button" onClick={confirmDelete}>Delete Melody</Button>
+        <Button id="delete" className="delete button" onClick={showModal}>Delete Melody</Button>
       )
     }
   }
   return(
     <div className="show-page">
+    <MelodyModal
+      show={melodyModalShow}
+      hideModal={hideModal}
+      melody={melodyInfo.melody}
+      />
+    <DeleteModal
+      show={deleteModalShow}
+      hideModal={hideModal}
+      deleteMelody={deleteMelody}
+    />
       <div className="show-title">
         <h3>{melodyInfo.name}</h3>
         <h5>by <Link to={`/users/${user.id}`}>{user.username}</Link></h5>
@@ -155,7 +188,8 @@ const MelodyShowContainer = (props) => {
             title: 'Prices'
           },
           colors: ['#6fffe9'],
-          backgroundColor: '#0b132b'
+          backgroundColor: '#0b132b',
+          tooltip: {isHtml: true}
         }}
         rootProps={{ 'data-testid': '1' }}
       />
@@ -163,6 +197,7 @@ const MelodyShowContainer = (props) => {
         <div>{name}</div>
         <div>Dates: {start} to {end}</div>
         <div>Time interval: {interval}</div>
+        <Button id="melody" className="button" onClick={showModal}>Show Melody Notes</Button>
       </div>
       <div className="play-container">
         <MelodyPlayer classStyle="play" name={melodyInfo.name} melody={melodyInfo.melody} />
