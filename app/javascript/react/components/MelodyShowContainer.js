@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Chart } from "react-google-charts";
 import { Redirect, Link } from 'react-router-dom'
-import Button from 'react-bootstrap/Button'
+
+import { Chart } from "react-google-charts";
+
 import MelodyPlayer from './MelodyPlayer'
 import FormSelect from './FormSelect'
 import EditForm from './EditForm'
 import DeleteModal from './DeleteModal'
 import MelodyModal from './MelodyModal'
+import Button from 'react-bootstrap/Button'
+
 const MelodyShowContainer = (props) => {
   const [ melodyInfo, setMelodyInfo ] = useState({})
   const [ user, setUser ] = useState({})
@@ -16,6 +19,7 @@ const MelodyShowContainer = (props) => {
   const [ scaleForm, setScaleForm ] = useState("")
   const [ deleteModalShow, setDeleteModalShow ] = useState(false)
   const [ melodyModalShow, setMelodyModalShow ] = useState(false)
+
   useEffect(() => {
     let id = props.match.params.id
     fetch(`/api/v1/melodies/${id}`)
@@ -159,11 +163,13 @@ const MelodyShowContainer = (props) => {
   }
   return(
     <div className="show-page">
+
     <MelodyModal
       show={melodyModalShow}
       hideModal={hideModal}
       melody={melodyInfo.melody}
       />
+
     <DeleteModal
       show={deleteModalShow}
       hideModal={hideModal}
@@ -171,8 +177,10 @@ const MelodyShowContainer = (props) => {
     />
       <div className="show-title">
         <h3>{melodyInfo.name}</h3>
+
         <h5>by <Link to={`/users/${user.id}`}>{user.username}</Link></h5>
       </div>
+
       <Chart
         className="chart-box"
         width={'80%'}
@@ -193,18 +201,21 @@ const MelodyShowContainer = (props) => {
         }}
         rootProps={{ 'data-testid': '1' }}
       />
+
       <div className="show-info">
         <div>{name}</div>
         <div>Dates: {start} to {end}</div>
         <div>Time interval: {interval}</div>
         <Button id="melody" className="button" onClick={showModal}>Show Melody Notes</Button>
       </div>
+
       <div className="play-container">
         <MelodyPlayer classStyle="play" name={melodyInfo.name} melody={melodyInfo.melody} />
       </div>
+
       <div className="show-bottom">
         <div>
-        {scaleForm}
+          {scaleForm}
         </div>
         {editButton}
         {deleteButton}

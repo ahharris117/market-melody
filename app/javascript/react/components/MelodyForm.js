@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
+
 import FormSelect from './FormSelect'
 import ErrorList from './ErrorList'
+
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+
 const MelodyForm = props => {
   const [formData, setFormData] = useState({
     stock: "",
@@ -97,12 +100,13 @@ const MelodyForm = props => {
       <Form.Group>
         <Form.Label>Stock Symbol</Form.Label>
           <Form.Control type="text" id="stock" onChange={symbolChangeHandler} list="data" value={formData.stock} />
-          <datalist id="data">
-            <option></option>
-            {stockOptions}
-          </datalist>
+            <datalist id="data">
+              <option></option>
+              {stockOptions}
+            </datalist>
           <Form.Text>Select from autofill options</Form.Text>
       </Form.Group>
+
       <FormSelect
         label="Scale"
         array={scaleOptionNames}
@@ -110,6 +114,7 @@ const MelodyForm = props => {
         value={formData.scale}
         onChangeHandler={onChangeHandler}
       />
+
       <FormSelect
         label="Interval"
         array={intervals}
@@ -117,7 +122,9 @@ const MelodyForm = props => {
         value={formData.interval}
         onChangeHandler={onChangeHandler}
       />
+
       <div>{props.error}</div>
+      
       <Button className="button" type="submit" value="Submit">Submit</Button>
     </Form>
   )

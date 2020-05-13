@@ -20,6 +20,7 @@ class Api::V1::LikesController < ApplicationController
       currentUserLikes: Like.where(user_id: current_user.id)
     }
   end
+  
   private
   def serialized_melodies
     ActiveModelSerializers::SerializableResource.new(Melody.all, each_serializer: MelodyIndexSerializer)

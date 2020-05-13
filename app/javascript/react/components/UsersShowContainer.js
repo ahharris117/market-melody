@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import UserTile from './UserTile'
 import MelodyTile from './MelodyTile'
+
 const UsersShowContainer = props => {
   const [ userInfo, setUserInfo ] = useState({
     id: "",
@@ -55,6 +57,7 @@ const UsersShowContainer = props => {
         <Col sm={3} className="user-tile">
           <UserTile userInfo={userInfo} melodies={melodies}/>
         </Col>
+        
         <Col sm={8} className="melody-tile">
           {melodyTiles}
         </Col>

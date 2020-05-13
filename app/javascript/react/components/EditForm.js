@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
+
 import FormSelect from './FormSelect'
+
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+
 const EditForm = props => {
   const [ scales, setScales ] = useState([])
   const [ formValue, setFormValue ] = useState({
