@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Chart } from "react-google-charts";
 import { Redirect, Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 import MelodyPlayer from './MelodyPlayer'
 import FormSelect from './FormSelect'
 import EditForm from './EditForm'
@@ -126,22 +127,22 @@ const MelodyShowContainer = (props) => {
   if(currentUser) {
     if (user.id === currentUser.id) {
       editButton = (
-        <button className="button" onClick={renderScaleOptions}>Change Scale</button>
+        <Button className="button" onClick={renderScaleOptions}>Change Scale</Button>
       )
       deleteButton = (
-        <button className="delete button" onClick={confirmDelete}>Delete Melody</button>
+        <Button className="delete button" onClick={confirmDelete}>Delete Melody</Button>
       )
     }
   }
   return(
-    <div className="show">
+    <div className="show-page">
       <div className="show-title">
         <h3>{melodyInfo.name}</h3>
         <h5>by <Link to={`/users/${user.id}`}>{user.username}</Link></h5>
       </div>
       <Chart
         className="chart-box"
-        width={'900px'}
+        width={'80%'}
         height={'400px'}
         chartType="LineChart"
         loader={<div>Loading Chart</div>}
@@ -172,10 +173,6 @@ const MelodyShowContainer = (props) => {
         </div>
         {editButton}
         {deleteButton}
-      </div>
-      <div>
-        <Link to="/">Home</Link>
-        <Link to="/melodies/new">Create</Link>
       </div>
     </div>
   )

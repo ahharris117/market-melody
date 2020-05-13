@@ -5,18 +5,22 @@ import FormContainer from './FormContainer'
 import MelodyShowContainer from './MelodyShowContainer'
 import UsersShowContainer from './UsersShowContainer'
 import Feed from './Feed'
+import NavBar from './NavBar'
 export const App = (props) => {
 
   return (
     <div>
       <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/melodies/new' component={FormContainer} />
-          <Route exact path='/melodies/:id' component={MelodyShowContainer} />
-          <Route exact path='/users/:id' component={UsersShowContainer} />
-          <Route exact path='/melodies' component={Feed} />
-        </Switch>
+        <NavBar />
+        <div className="app-container">
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/melodies/new' component={FormContainer} />
+            <Route exact path='/melodies/:id' component={MelodyShowContainer} />
+            <Route exact path='/users/:id' component={UsersShowContainer} />
+            <Route exact path='/melodies' component={Feed} />
+          </Switch>
+        </div>
       </BrowserRouter>
     </div>
   )
