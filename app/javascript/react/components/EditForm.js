@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import FormSelect from './FormSelect'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 const EditForm = props => {
   const [ scales, setScales ] = useState([])
   const [ formValue, setFormValue ] = useState({
@@ -41,7 +43,7 @@ const EditForm = props => {
   }
 
   return(
-    <form onSubmit={formSubmitHandler}>
+    <Form onSubmit={formSubmitHandler}>
       <FormSelect
         label="Scale"
         array={scaleOptionNames}
@@ -49,10 +51,10 @@ const EditForm = props => {
         value={formValue.scale}
         onChangeHandler={scaleChange}
       />
-      <div className="button-group float-right">
-        <input className="button" type="submit" value="Submit" />
-      </div>
-    </form>
+        <Button className="button" type="submit" value="Submit">
+          Submit
+        </Button>
+    </Form>
   )
 }
 

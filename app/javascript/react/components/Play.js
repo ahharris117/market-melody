@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Tone from 'tone'
 import StartAudioContext from 'startaudiocontext'
 import { Chart } from "react-google-charts";
+import Button from 'react-bootstrap/Button'
 import MelodyPlayer from './MelodyPlayer'
 const Play = props => {
 
@@ -26,13 +27,13 @@ const Play = props => {
   let saveButton = ""
   if (props.melodyInfo.user) {
     saveButton = (
-      <button className="save button" onClick={handleSave}>Save Melody</button>
+      <Button className="button" onClick={handleSave}>Save Melody</Button>
     )
   }
   return(
-    <div className="play-container">
+    <div className="preview-container">
       <MelodyPlayer
-        clasStyle="play"
+        classStyle="play"
         melody={props.melodyInfo.melody}
         name={props.melodyInfo.name}
       />

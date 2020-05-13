@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import FeedItem from './FeedItem'
 import SortForm from './SortForm'
-
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 
 const Feed = props => {
   const [ melodies, setMelodies ] = useState([])
@@ -87,13 +88,7 @@ const Feed = props => {
   }
 
   const sortItems = (sortValue) => {
-    // if (sortValue === "Most Likes") {
-    // let newMelodies = melodies.sort(function(a, b) {
-    //     return b.likes.length - a.likes.length
-    //   })
-      // setMelodies(newMelodies)
       setSortBy(sortValue)
-    // }
   }
 
   useEffect(() => {
@@ -117,7 +112,7 @@ const Feed = props => {
         })
         setMelodies(newMelodies)
     }
-    if (melodies.length && currentUser) {
+    if (melodies.length) {
       setFeedContainer(melodies.map((melody) => {
         return(
           <FeedItem
@@ -132,11 +127,15 @@ const Feed = props => {
   }, [melodies, currentUser, currentUserLikes, sortBy])
 
   return(
-    <div>
+    <div className="feed">
       <div>
         <SortForm sortItems={sortItems} />
       </div>
-      {feedContainer}
+      <Container>
+        <Row>
+          {feedContainer}
+        </Row>
+      </Container>
     </div>
   )
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import MelodyPlayer from './MelodyPlayer'
+import Card from 'react-bootstrap/Card'
+import Col from 'react-bootstrap/Col'
 
 const FeedItem = props => {
   const likeMelody = event => {
@@ -14,7 +16,7 @@ const FeedItem = props => {
   }
   let liked = ""
 
-  if (props.melody.likes.length > 0 ) {
+  if (props.melody.likes.length > 0 && props.currentUser) {
     props.melody.likes.forEach((vote) => {
       // debugger;
       if(vote.user_id === props.currentUser.id) {
@@ -31,11 +33,17 @@ const FeedItem = props => {
 
   let parsedDate = parseDate(createdAtDate)
   return(
-    <div className="play-container" key={props.melody.id}>
-      <div><i className={`${liked} fas fa-heart`} onClick={likeMelody}></i>{props.melody.likes.length}</div>
-      <MelodyPlayer classStyle="play" name={nameLink} melody={props.melody.get_melody}/>
-      <div>{parsedDate}</div>
-    </div>
+    <Col sm={12} lg={6}>
+      <Card key={props.melody.id} className="feed-tile">
+        <MelodyPlayer classStyle="play" name={nameLink} melody={props.melody.get_melody}/>
+        <Card.Body>
+          <div className="feed-info">
+            <Card.Text>{parsedDate}</Card.Text>
+            <div className="feed-like"><i className={`${liked} fas fa-heart`} onClick={likeMelody}></i>{props.melody.likes.length}</div>
+          </div>
+        </Card.Body>
+      </Card>
+    </Col>
   )
 }
 

@@ -18,6 +18,10 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.app-container {
+  margin-top: 60px;
+}
+
 .chart-box text {
   fill: white;
 }
@@ -29,21 +33,29 @@ body {
 a {
   color: var(--aqua-neon);
   font-family: 'Montserrat', sans-serif;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 label {
   color: white;
 }
+
 .main-image {
+  margin-top: 50px;
   max-height: 400px;
   width: 100%
 }
 
-h1 a  {
+h3 h1 {
   font-family: 'Roboto Slab', serif;
 }
+
 .navbar {
   background-color: var(--black);
+  font-family: 'Roboto Slab', serif;
 }
 
 .homeline {
@@ -53,8 +65,8 @@ h1 a  {
 }
 
 .homelink {
-  padding: 20px;
-  margin: 30px;
+  margin-bottom: 30px;
+  background-color: var(--darkblue);
   font-size: 1.2em;
   text-align: center;
   transition: all .5s linear;
@@ -67,32 +79,51 @@ h1 a  {
 }
 
 .form-container {
-  background-color: var(--grey);
-  padding-top: 10px;
-  padding-bottom: 50px;
-  .form {
-    font-size: 0.9rem;
-    border: none;
-    background-color: var(--grey);
+  background-color: var(--darkblue);
+  padding-top: 70px;
+  padding-bottom: 40px;
+  form {
     width: 50%;
     margin: 0 auto;
-    color: white;
-    label {
-      font-size: .9rem;
-      color: white;
-    }
-    .help-text {
-      color: white;
-    }
   }
 }
 
 .button {
+  background-color: var(--black);
+  border: none;
+}
+
+.preview-container {
+  color: white;
+  font-size: 1.5rem;
+  width: 50%;
+  min-width: 410px;
+  padding: 1em 0;
+  border: 2px solid var(--grey);
+  border-radius: 10px;
   background-color: var(--darkblue);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  .play {
+    display: flex;
+    align-items: center;
+  }
+  .melody-title {
+    margin-left: 10px;
+    display: inline;
+  }
+  .button {
+    margin-top: 20px;
+  }
+  .chart-container > div {
+    margin: 15px auto;
+  }
 }
 
 .play-container {
-  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -132,6 +163,16 @@ h1 a  {
   }
 }
 
+.play {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  .melody-title {
+    margin-left: 10px;
+  }
+}
+
 .far {
   color: var(--aqua-neon);
   font-size: 3rem;
@@ -142,18 +183,24 @@ h1 a  {
   }
 }
 
-.show {
+.show-page {
+  margin-top: 100px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--darkblue);
   text-align: center;
+  button {
+    margin: 10px 10px;
+  }
   a {
     margin: 20px;
   }
   .chart-box{
     margin: 15px auto;
+    min-width: 380px;
   }
   .play-container {
     background-color: var(--black)
@@ -179,11 +226,6 @@ h1 a  {
   background-color: var(--grey);
 }
 
-@media (max-width: 768px) {
-    .user-head {
-        display: none;
-    }
-}
 .user-head{
   position: absolute;
   background-color: var(--black);
@@ -211,6 +253,7 @@ h1 a  {
 }
 
 .user-show {
+  margin-top: 60px;
   height: 100%;
 }
 .user-tile {
@@ -240,4 +283,97 @@ h1 a  {
 
 .sort-by {
   width: 20%;
+}
+
+.melody-card {
+  background-color: var(--black);
+  color: white;
+  margin: 20px;
+}
+
+.user-container {
+  margin-top: 80px;
+  background-color: var(--darkblue);
+}
+
+.user-tile {
+  padding: 20px;
+  background-color: var(--black);
+  position: fixed;
+}
+
+
+.melody-tile {
+  margin-top: 30px;
+  margin-left: 25%;
+}
+
+.devise {
+  width: 30%;
+  top: 40px;
+  right: 10px;
+  position: fixed;
+  z-index: 1100;
+  ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    li {
+      align-items: center;
+    }
+  }
+}
+
+@media (max-width: 577px) {
+  nav.navbar {
+    z-index: 1170;
+  }
+  .user-tile {
+    position: relative;
+  }
+  .melody-tile {
+    margin: 0;
+  }
+  .devise {
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    height: 20px;
+    background-color: var(--black);
+    ul {
+      background-color: var(--black);
+      width: 110%;
+      padding-right: 30px;
+    }
+    li {
+      margin-right: 20px;
+      padding: 20px;
+      display: inline;
+    }
+  }
+}
+
+.feed {
+  margin-top: 120px;
+  background-color: var(--darkblue)
+}
+.feed-tile {
+  color: white;
+  background-color: var(--black);
+  margin: 20px;
+  a {
+    color: white;
+  }
+}
+
+.feed-info {
+  display: flex;
+  flex-direction: row;
+  .feed-like {
+    margin-left: auto;
+    display: inline;
+  }
+  .fas {
+    margin-right: 10px;
+  }
 }

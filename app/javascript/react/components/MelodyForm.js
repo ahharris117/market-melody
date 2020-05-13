@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import FormSelect from './FormSelect'
 import ErrorList from './ErrorList'
-
-const Form = props => {
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+const MelodyForm = props => {
   const [formData, setFormData] = useState({
     stock: "",
     scale: "",
@@ -91,18 +92,17 @@ const Form = props => {
   }
 
   return(
-    <form onSubmit={onSubmitHandler} className="form callout">
+    <Form onSubmit={onSubmitHandler}>
       <ErrorList errors={errors} />
-      <div className="datalist">
-        <label htmlFor="stock">Stock Symbol
-          <input type="text" id="stock" onChange={symbolChangeHandler} list="data" value={formData.stock} />
+      <Form.Group>
+        <Form.Label>Stock Symbol</Form.Label>
+          <Form.Control type="text" id="stock" onChange={symbolChangeHandler} list="data" value={formData.stock} />
           <datalist id="data">
             <option></option>
             {stockOptions}
           </datalist>
-          <p className="help-text">Select from autofill options</p>
-        </label>
-      </div>
+          <Form.Text>Select from autofill options</Form.Text>
+      </Form.Group>
       <FormSelect
         label="Scale"
         array={scaleOptionNames}
@@ -110,7 +110,6 @@ const Form = props => {
         value={formData.scale}
         onChangeHandler={onChangeHandler}
       />
-
       <FormSelect
         label="Interval"
         array={intervals}
@@ -119,11 +118,9 @@ const Form = props => {
         onChangeHandler={onChangeHandler}
       />
       <div>{props.error}</div>
-      <div className="button-group float-right">
-        <input className="button" type="submit" value="Submit" />
-      </div>
-    </form>
+      <Button className="button" type="submit" value="Submit">Submit</Button>
+    </Form>
   )
 }
 
-export default Form
+export default MelodyForm

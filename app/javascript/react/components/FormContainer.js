@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
-import Form from './form'
+import MelodyForm from './MelodyForm'
 import Play from './Play'
 
 const FormContainer = props => {
@@ -104,7 +104,7 @@ const FormContainer = props => {
   return(
     <div>
       <div className="form-container">
-        <Form scales={scales} error={errorMessage} submitForm={submitForm} user/>
+        <MelodyForm scales={scales} error={errorMessage} submitForm={submitForm} user/>
       </div>
       {playComponent}
     </div>

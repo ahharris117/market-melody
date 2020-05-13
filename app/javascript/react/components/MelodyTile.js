@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import Card from 'react-bootstrap/Card'
 const MelodyTile = props => {
 
   return(
-    <div className="melody-tile">
-      <Link to={`/melodies/${props.melody.id}`}>
-        <h5>{props.melody.get_name}</h5>
-        <div>{props.melody.stock.name} - {props.melody.stock.interval}</div>
-      </Link>
-    </div>
+    <Card className="melody-card">
+      <Card.Body>
+        <Card.Title><Link to={`/melodies/${props.melody.id}`}>{props.melody.get_name}</Link></Card.Title>
+        <Card.Text>{props.melody.stock.name} - {props.melody.stock.interval}</Card.Text>
+      </Card.Body>
+    </Card>
   )
 }
 
