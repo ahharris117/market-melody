@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
+
 import Tone from 'tone'
 import StartAudioContext from 'startaudiocontext'
-import { Chart } from "react-google-charts";
-import Button from 'react-bootstrap/Button'
-import MelodyPlayer from './MelodyPlayer'
-const Play = props => {
 
+import { Chart } from "react-google-charts";
+
+import Button from 'react-bootstrap/Button'
+
+import MelodyPlayer from './MelodyPlayer'
+
+const Play = props => {
   const chartData = () => {
     const data = [];
     if (props.melodyInfo.prices) {
@@ -37,6 +41,7 @@ const Play = props => {
         melody={props.melodyInfo.melody}
         name={props.melodyInfo.name}
       />
+
       <div className="chart-container">
         <Chart
           className="chart-box"
@@ -57,7 +62,7 @@ const Play = props => {
           }}
           rootProps={{ 'data-testid': '1' }}
         />
-      </div>
+      </div>    
       {saveButton}
     </div>
   )

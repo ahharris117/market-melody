@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
@@ -6,7 +7,7 @@ const DeleteModal = props => {
   const hide = () => {
     props.hideModal("delete")
   }
-  
+
   return(
     <Modal show={props.show} onHide={hide}>
       <Modal.Header>

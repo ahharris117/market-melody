@@ -18,6 +18,14 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+h3 h1 {
+  font-family: 'Roboto Slab', serif;
+}
+
+label {
+  color: white;
+}
+
 .app-container {
   margin-top: 60px;
 }
@@ -42,18 +50,10 @@ a {
   }
 }
 
-label {
-  color: white;
-}
-
 .main-image {
   margin-top: 50px;
   max-height: 400px;
   width: 100%
-}
-
-h3 h1 {
-  font-family: 'Roboto Slab', serif;
 }
 
 .navbar {

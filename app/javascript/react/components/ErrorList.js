@@ -1,6 +1,9 @@
 import React from 'react'
+
 import _ from 'lodash'
+
 import Alert from 'react-bootstrap/Alert'
+
 const ErrorList = props => {
   const errantFields = Object.keys(props.errors)
   if (errantFields.length > 0) {

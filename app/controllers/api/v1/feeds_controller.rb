@@ -7,6 +7,7 @@ class Api::V1::FeedsController < ApplicationController
       currentUser = ''
       currentUserLikes = []
     end
+    
     render json: {
       melodies: serialized_melodies,
       currentUser: currentUser,

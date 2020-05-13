@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
+
 import FeedItem from './FeedItem'
 import SortForm from './SortForm'
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
@@ -10,6 +12,7 @@ const Feed = props => {
   const [ currentUserLikes, setCurrentUserLikes ] = useState([])
   const [ sortBy, setSortBy ] = useState("Date (Newest)")
   const [ feedContainer, setFeedContainer ] = useState([])
+
   useEffect(() => {
     fetch('/api/v1/feeds', {
       credentials: "same-origin",
@@ -131,6 +134,7 @@ const Feed = props => {
       <div>
         <SortForm sortItems={sortItems} />
       </div>
+      
       <Container>
         <Row>
           {feedContainer}
