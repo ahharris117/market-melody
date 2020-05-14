@@ -44,6 +44,7 @@ label {
 a {
   color: var(--aqua-neon);
   font-family: 'Montserrat', sans-serif;
+  transition: all .5s linear;
   &:hover {
     color: white;
     text-decoration: none;
@@ -221,6 +222,9 @@ a {
     a {
       margin: 0px;
       color: white;
+      &:hover {
+        color: var(--aqua-neon);
+      }
     }
   }
 }
@@ -319,12 +323,16 @@ a {
   z-index: 1100;
   ul {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     list-style: none;
     li {
       align-items: center;
     }
   }
+}
+
+#sign-out {
+  margin-left: 60%;;
 }
 
 @media (max-width: 577px) {
@@ -345,14 +353,17 @@ a {
     background-color: var(--black);
     ul {
       background-color: var(--black);
-      width: 110%;
-      padding-right: 30px;
+      width: 103%;
     }
     li {
       margin-right: 20px;
       padding: 20px;
       display: inline;
     }
+  }
+  #sign-out {
+    margin-left: 0px;
+    margin-right: 20px;
   }
 }
 
@@ -364,20 +375,32 @@ a {
   color: white;
   background-color: var(--black);
   margin: 20px;
+  padding: 10px;
+  .play-icon {
+    font-size: 2.6em;
+  }
+  .feed-like {
+    text-align: end;
+    font-size: .85em;
+  }
+  .play {
+    justify-content: flex-start;
+    margin-left: 0%;
+    width: 90%
+  }
+  .card-body {
+    padding: 5px;
+  }
   a {
     color: white;
   }
 }
 
 .feed-info {
-  display: flex;
-  flex-direction: row;
-  .feed-like {
-    margin-left: auto;
-    display: inline;
-  }
-  .fas {
-    margin-right: 10px;
+  p {
+    display: flex;
+    justify-content: space-between;
+    font-size: .85em;
   }
 }
 
@@ -387,4 +410,24 @@ a {
   .close {
     color: white;
   }
+}
+
+.erb-form {
+  display: flex;
+  width: 100%;
+  margin-top: 120px;
+  padding: 30px;
+  background-color: var(--darkblue);
+  form {
+    padding: 20px;
+    margin: 0 auto;
+    width: 50%;
+  }
+  input {
+    margin: 5px;
+  }
+}
+
+.erb-top {
+  height: 65px;
 }

@@ -1,16 +1,17 @@
-<h2>Forgot your password?</h2>
-
+<div class="erb-top p-sm-4 navbar navbar-expand-sm navbar-dark fixed-top">Forgot your password?</div>
+<div class="erb-form">
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+      <button class="btn btn-primary button" name="commit" type="submit" value="Send me reset password instructions" data-disable-with="Send me reset password instructions">Send me reset password instructions</button>
   </div>
 <% end %>
+</div>
 
 <%= render "devise/shared/links" %>
