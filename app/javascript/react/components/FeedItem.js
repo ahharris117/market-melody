@@ -36,15 +36,16 @@ const FeedItem = props => {
   let parsedDate = parseDate(createdAtDate)
 
   return(
-    <Col sm={12} lg={6}>
+    <Col sm={12} md={6} lg={4}>
       <Card key={props.melody.id} className="feed-tile">
+        <div className="feed-like"><i className={`${liked} fas fa-heart`} onClick={likeMelody}></i> {props.melody.likes.length}</div>
         <MelodyPlayer classStyle="play" name={nameLink} melody={props.melody.get_melody}/>
-
         <Card.Body>
           <div className="feed-info">
-            <Card.Text>{parsedDate}</Card.Text>
-            
-            <div className="feed-like"><i className={`${liked} fas fa-heart`} onClick={likeMelody}></i>{props.melody.likes.length}</div>
+            <Card.Text>
+              <span>{props.melody.user.username}</span>
+              <span>{parsedDate}</span>
+            </Card.Text>
           </div>
         </Card.Body>
       </Card>
