@@ -114,10 +114,14 @@ const MelodyShowContainer = (props) => {
       shouldRedirect(true)
     })
   }
+  
+  const closeForm = () => {
+    setScaleForm("")
+  }
 
   const renderScaleOptions = () => {
     setScaleForm((
-      <EditForm editScale={editScale}/>
+      <EditForm editScale={editScale} close={closeForm}/>
     ))
   }
 

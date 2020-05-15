@@ -14,6 +14,8 @@ const FeedItem = props => {
         user_id: props.currentUser.id
       }
       props.handleLike(payload)
+    } else {
+      alert("You must be signed in to vote")
     }
   }
 

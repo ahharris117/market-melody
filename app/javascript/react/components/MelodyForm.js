@@ -109,6 +109,7 @@ const MelodyForm = props => {
 
       <FormSelect
         label="Scale"
+        show={props.show}
         array={scaleOptionNames}
         id="scale"
         value={formData.scale}
@@ -122,9 +123,9 @@ const MelodyForm = props => {
         value={formData.interval}
         onChangeHandler={onChangeHandler}
       />
-
-      <div>{props.error}</div>
       
+      <div>{props.error}</div>
+
       <Button className="button" type="submit" value="Submit">Submit</Button>
     </Form>
   )
