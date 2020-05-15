@@ -15,9 +15,14 @@ const MelodyModal = props => {
   }
 
   return(
-    <Modal show={props.show} size="lg" onHide={hide}>
+    <Modal 
+      show={props.show}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      onHide={hide}>
       <Modal.Header>
-        <Modal.Title>Melody Notes:</Modal.Title>
+        <Modal.Title>Melody Notes</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>

@@ -131,10 +131,10 @@ const Feed = props => {
 
   return(
     <div className="feed">
-      <div>
+      <div className="sort">
         <SortForm sortItems={sortItems} />
       </div>
-      
+
       <Container>
         <Row>
           {feedContainer}

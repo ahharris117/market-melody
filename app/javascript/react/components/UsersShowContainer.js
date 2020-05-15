@@ -51,7 +51,7 @@ const UsersShowContainer = props => {
       )
     })
   }
-  
+
   return(
     <Container fluid className="user-container">
       <Row>
