@@ -30,7 +30,7 @@ const Home = props => {
     })
   }, [])
 
-  let homeLink = ""
+  let homeLink = "";
   if (currentUser === false) {
     homeLink = (
       <HomeLink text="Sign up" aLink={'/users/sign_up'} />
@@ -40,6 +40,7 @@ const Home = props => {
       <HomeLink text="Profile" link={`/users/${currentUser.user.id}`} />
     )
   }
+  
   return(
     <div>
       <div>
@@ -49,7 +50,7 @@ const Home = props => {
       <Container>
         <Row style={{justifyContent: "center"}}>
           <Col sm={10} lg={4}><HomeLink text="Create" link={"/melodies/new"}/></Col>
-          <Col sm={10} lg={4}>{homeLink}</Col>    
+          <Col sm={10} lg={4}>{homeLink}</Col>
           <Col sm={10} lg={4}><HomeLink text="Feed" link={"/melodies"} /></Col>
         </Row>
       </Container>

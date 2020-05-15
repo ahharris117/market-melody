@@ -11,6 +11,7 @@ const EditForm = props => {
     scale: ""
   })
   const [ error, setError ] = useState("")
+  
   useEffect(() => {
     fetch('/api/v1/scales')
     .then((response) => {
@@ -36,7 +37,7 @@ const EditForm = props => {
     })
   }
 
-  let scaleOptionNames = ""
+  let scaleOptionNames = "";
   scaleOptionNames = scales.map((scale) => {
     return scale.name
   })

@@ -51,13 +51,14 @@ const UsersShowContainer = props => {
       )
     })
   }
+  
   return(
     <Container fluid className="user-container">
       <Row>
         <Col sm={3} className="user-tile">
           <UserTile userInfo={userInfo} melodies={melodies}/>
         </Col>
-        
+
         <Col sm={8} className="melody-tile">
           {melodyTiles}
         </Col>
