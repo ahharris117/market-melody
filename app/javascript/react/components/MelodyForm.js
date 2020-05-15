@@ -109,6 +109,7 @@ const MelodyForm = props => {
 
       <FormSelect
         label="Scale"
+        show={props.show}
         array={scaleOptionNames}
         id="scale"
         value={formData.scale}

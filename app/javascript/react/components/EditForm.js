@@ -11,7 +11,7 @@ const EditForm = props => {
     scale: ""
   })
   const [ error, setError ] = useState("")
-
+  
   useEffect(() => {
     fetch('/api/v1/scales')
     .then((response) => {
@@ -45,9 +45,9 @@ const EditForm = props => {
   const formSubmitHandler = (event) => {
     event.preventDefault()
     if (formValue.scale === "") {
-      setError("You must select a scale.")
+      setError("Must select a scale.")
     } else {
-      props.editScale(formValue)
+    props.editScale(formValue)
     }
   }
 
@@ -61,10 +61,9 @@ const EditForm = props => {
         value={formValue.scale}
         onChangeHandler={scaleChange}
       />
-        <Button className="button" value="Close" onClick={props.close}>
+        <Button className="button" onClick={props.close} value="Close">
           Close
         </Button>
-
         <Button className="button" type="submit" value="Submit">
           Submit
         </Button>
