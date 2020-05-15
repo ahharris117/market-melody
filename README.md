@@ -1,7 +1,7 @@
 # README
 ###Market Melody
 #####Hear your Profile
-A conceptual melodizer meant for audio-visualizationton of data.
+A conceptual melodizer meant for audio-visualization of data.
 
 Hear your Portfolio.
 

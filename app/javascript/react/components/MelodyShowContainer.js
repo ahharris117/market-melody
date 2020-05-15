@@ -211,7 +211,7 @@ const MelodyShowContainer = (props) => {
       <div className="show-info">
         <div>{name}</div>
         <div>Dates: {start} to {end}</div>
-        <div>Time interval: {interval}</div>
+        <div>Time Interval: {interval}</div>
         <Button id="melody" className="button" onClick={showModal}>Show Melody Notes</Button>
       </div>
 

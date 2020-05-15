@@ -57,6 +57,9 @@ const Play = props => {
           loader={<div>Loading Chart</div>}
           data={chartData()}
           options={{
+            'tooltip' : {
+            trigger: 'none'
+            },
             hAxis: {
               title: props.melodyInfo.interval,
             },

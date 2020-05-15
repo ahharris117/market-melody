@@ -214,7 +214,7 @@ a {
   }
   .chart-box{
     margin: 15px auto;
-    min-width: 330px;
+    min-width: 360px;
   }
   .play-container {
     background-color: var(--black)
@@ -317,6 +317,9 @@ a {
   padding: 20px;
   background-color: var(--black);
   position: fixed;
+  img {
+    max-width: 167px;
+  }
 }
 
 
@@ -345,7 +348,16 @@ a {
   margin-left: 60%;;
 }
 
+.sort {
+  padding: 30px;
+}
 @media (max-width: 577px) {
+  .sort {
+    width: 100%;
+    .form-group {
+      width: 180px;
+    }
+  }
   nav.navbar {
     z-index: 1170;
   }
@@ -445,4 +457,8 @@ a {
 .list-group-item {
   background-color: var(--grey);
   color: white;
+}
+
+.modal {
+  z-index: 1201;
 }

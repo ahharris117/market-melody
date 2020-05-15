@@ -11,11 +11,11 @@ const DeleteModal = props => {
   return(
     <Modal show={props.show} onHide={hide}>
       <Modal.Header>
-        <Modal.Title>Delete this melody?</Modal.Title>
+        <Modal.Title>Delete this Melody?</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <div>Are you sure you want to delete this melody? This will bring you back to the home page.</div>
+        <div>Are you sure you want to delete this melody? Clicking delete will permanently delete this melody and bring you back to the home page.</div>
       </Modal.Body>
 
       <Modal.Footer>

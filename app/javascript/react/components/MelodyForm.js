@@ -97,6 +97,7 @@ const MelodyForm = props => {
   return(
     <Form onSubmit={onSubmitHandler}>
       <ErrorList errors={errors} />
+      <div>{props.error}</div>
       <Form.Group>
         <Form.Label>Stock Symbol</Form.Label>
           <Form.Control type="text" id="stock" onChange={symbolChangeHandler} list="data" value={formData.stock} />
@@ -123,8 +124,6 @@ const MelodyForm = props => {
         value={formData.interval}
         onChangeHandler={onChangeHandler}
       />
-
-      <div>{props.error}</div>
 
       <Button className="button" type="submit" value="Submit">Submit</Button>
     </Form>
