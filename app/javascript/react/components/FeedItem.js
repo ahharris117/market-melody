@@ -14,10 +14,12 @@ const FeedItem = props => {
         user_id: props.currentUser.id
       }
       props.handleLike(payload)
+    } else {
+      alert("You must be signed in to like a melody")
     }
   }
 
-  let liked = ""
+  let liked = "";
   if (props.melody.likes.length > 0 && props.currentUser) {
     props.melody.likes.forEach((vote) => {
       if(vote.user_id === props.currentUser.id) {
@@ -33,7 +35,7 @@ const FeedItem = props => {
 
   let nameLink = (<Link to={`/melodies/${props.melody.id}`}>{props.melody.get_name}</Link>);
 
-  let parsedDate = parseDate(createdAtDate)
+  let parsedDate = parseDate(createdAtDate);
 
   return(
     <Col sm={12} md={6} lg={4}>

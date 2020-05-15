@@ -28,12 +28,14 @@ const Play = props => {
     event.preventDefault()
     props.saveMelody()
   }
-  let saveButton = ""
+
+  let saveButton = "";
   if (props.melodyInfo.user) {
     saveButton = (
       <Button className="button" onClick={handleSave}>Save Melody</Button>
     )
   }
+  
   return(
     <div className="preview-container">
       <MelodyPlayer
@@ -62,7 +64,7 @@ const Play = props => {
           }}
           rootProps={{ 'data-testid': '1' }}
         />
-      </div>    
+      </div>
       {saveButton}
     </div>
   )

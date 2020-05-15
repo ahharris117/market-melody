@@ -10,6 +10,8 @@ const EditForm = props => {
   const [ formValue, setFormValue ] = useState({
     scale: ""
   })
+  const [ error, setError ] = useState("")
+
   useEffect(() => {
     fetch('/api/v1/scales')
     .then((response) => {
@@ -35,18 +37,23 @@ const EditForm = props => {
     })
   }
 
-  let scaleOptionNames = ""
+  let scaleOptionNames = "";
   scaleOptionNames = scales.map((scale) => {
     return scale.name
   })
 
   const formSubmitHandler = (event) => {
     event.preventDefault()
-    props.editScale(formValue)
+    if (formValue.scale === "") {
+      setError("You must select a scale.")
+    } else {
+      props.editScale(formValue)
+    }
   }
 
   return(
     <Form onSubmit={formSubmitHandler}>
+      {error}
       <FormSelect
         label="Scale"
         array={scaleOptionNames}
@@ -54,6 +61,10 @@ const EditForm = props => {
         value={formValue.scale}
         onChangeHandler={scaleChange}
       />
+        <Button className="button" value="Close" onClick={props.close}>
+          Close
+        </Button>
+
         <Button className="button" type="submit" value="Submit">
           Submit
         </Button>
