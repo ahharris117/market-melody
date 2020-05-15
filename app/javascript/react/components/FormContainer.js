@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 import MelodyForm from './MelodyForm'
 import Play from './Play'
+import ScaleInfoModal from './ScaleInfoModal'
 
 const FormContainer = props => {
   const [ scales, setScales ] = useState([])
@@ -20,6 +21,7 @@ const FormContainer = props => {
   const [ errorMessage, setErrorMessage ] = useState("")
   const [ showId, setShowId ] = useState("")
   const [ shouldRedirect, setShouldRedirect ] = useState(false)
+  const [ showModal, shouldShowModal ] = useState(false)
 
   useEffect(() => {
     fetch('/api/v1/scales')
@@ -102,10 +104,23 @@ const FormContainer = props => {
     playComponent = ""
   }
 
+  const show = () => {
+    shouldShowModal(true)
+  }
+
+  const hide = () => {
+    shouldShowModal(false)
+  }
   return(
     <div>
+      <ScaleInfoModal show={showModal} hide={hide} />
       <div className="form-container">
-        <MelodyForm scales={scales} error={errorMessage} submitForm={submitForm} user/>
+        <MelodyForm
+          show={show}
+          scales={scales}
+          error={errorMessage}
+          submitForm={submitForm}
+        />
       </div>
       {playComponent}
     </div>

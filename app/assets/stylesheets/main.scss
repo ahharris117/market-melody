@@ -24,6 +24,13 @@ h3 h1 {
 
 label {
   color: white;
+  .fas {
+    color: var(--aqua);
+    transition: all .5s linear;
+    &:hover {
+      color: var(--red);
+    }
+  }
 }
 
 .app-container {
@@ -433,4 +440,9 @@ a {
 
 .erb-top {
   height: 65px;
+}
+
+.list-group-item {
+  background-color: var(--grey);
+  color: white;
 }
