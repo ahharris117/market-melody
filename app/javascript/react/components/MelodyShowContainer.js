@@ -72,10 +72,10 @@ const MelodyShowContainer = (props) => {
     }
   }
 
-  let interval = ""
-  let start = ""
-  let end =""
-  let name = ""
+  let interval;
+  let start;
+  let end;
+  let name ;
   if (stockInfo.stock) {
     interval = stockInfo.stock.interval
     start = stockInfo.dates[35]
@@ -115,13 +115,15 @@ const MelodyShowContainer = (props) => {
     })
   }
 
-  const renderScaleOptions = () => {
-    setScaleForm((
-      <EditForm editScale={editScale}/>
-    ))
+  const close = () => {
+    setScaleForm("")
   }
 
-
+  const renderScaleOptions = () => {
+    setScaleForm((
+      <EditForm editScale={editScale} close={close} />
+    ))
+  }
 
   const editScale = (scaleName) => {
     let id = props.match.params.id
@@ -148,9 +150,8 @@ const MelodyShowContainer = (props) => {
     return <Redirect to="/" />
   }
 
-
-  let editButton = ""
-  let deleteButton = ""
+  let editButton = "";
+  let deleteButton = "";
   if(currentUser) {
     if (user.id === currentUser.id) {
       editButton = (
@@ -161,6 +162,7 @@ const MelodyShowContainer = (props) => {
       )
     }
   }
+
   return(
     <div className="show-page">
 

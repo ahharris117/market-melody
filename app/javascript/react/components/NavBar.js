@@ -24,12 +24,13 @@ const NavBar = props => {
     })
   }, [])
 
-  let userLink = ""
+  let userLink = "";
   if(currentUser) {
     userLink = (
       <Nav.Item className="mr-sm-4"><Link to={`/users/${currentUser.user.id}`}>{currentUser.user.username}</Link></Nav.Item>
     )
   }
+  
   return(
     <Navbar collapseOnSelect variant="dark" expand="sm" fixed="top" className="p-sm-4">
       <Navbar.Brand className="mr-sm-4"><Link to="/"><h3>Market Melody</h3></Link></Navbar.Brand>

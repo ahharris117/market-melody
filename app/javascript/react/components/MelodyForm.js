@@ -22,7 +22,7 @@ const MelodyForm = props => {
   })
 
 
-  let stockOptions = ""
+  let stockOptions = "";
   if (matches.length > 0) {
     stockOptions = matches.map((stock) => {
       return(
@@ -124,7 +124,7 @@ const MelodyForm = props => {
       />
 
       <div>{props.error}</div>
-      
+
       <Button className="button" type="submit" value="Submit">Submit</Button>
     </Form>
   )

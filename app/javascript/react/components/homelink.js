@@ -11,6 +11,7 @@ const HomeLink = props => {
   } else {
     linkEl = (<Link to={props.link}><Card.Body>{props.text}</Card.Body></Link>);
   }
+  
   return(
     <Card className="homelink">
       {linkEl}
