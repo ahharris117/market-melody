@@ -34,8 +34,12 @@ const Play = props => {
     saveButton = (
       <Button className="button" onClick={handleSave}>Save Melody</Button>
     )
+  } else {
+    saveButton = (
+        <a href="/users/sign_in">Sign in to save a melody</a>
+    )
   }
-  
+
   return(
     <div className="preview-container">
       <MelodyPlayer

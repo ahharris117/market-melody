@@ -125,6 +125,9 @@ a {
   .chart-container > div {
     margin: 15px auto;
   }
+  a {
+    font-size: .7em;
+  }
 }
 
 .play-container {
@@ -204,7 +207,7 @@ a {
   }
   .chart-box{
     margin: 15px auto;
-    min-width: 380px;
+    min-width: 330px;
   }
   .play-container {
     background-color: var(--black)
