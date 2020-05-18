@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-
-import Soundwave from 'images/soundwave.jpg'
-import HomeLink from './homelink'
-
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
+
+import Soundwave from 'images/soundwave.jpg'
+import HomeLink from './HomeLink'
 
 const Home = props => {
   const [ currentUser, setCurrentUser ] = useState(false)
@@ -20,27 +19,13 @@ const Home = props => {
         "Content-Type": "application/json"
       }
     })
-    .then((response) => {
-      return response.json()
-    })
-    .then((body) => {
-      if (body !== null) {
-        setCurrentUser(body)
-      }
-    })
+    .then(response => response.json())
+    .then(body => body && setCurrentUser(body))
   }, [])
 
-  let homeLink = "";
-  if (currentUser === false) {
-    homeLink = (
-      <HomeLink text="Sign up" aLink={'/users/sign_up'} />
-    )
-  } else {
-    homeLink = (
-      <HomeLink text="Profile" link={`/users/${currentUser.user.id}`} />
-    )
-  }
-  
+  const homeLink = currentUser ? <HomeLink text="Profile" link={`/users/${currentUser.user.id}`} />
+                               : <HomeLink text="Sign up" aLink={'/users/sign_up'} />;
+
   return(
     <div>
       <div>
@@ -55,7 +40,7 @@ const Home = props => {
         </Row>
       </Container>
     </div>
-  )
-}
+  );
+};
 
 export default Home

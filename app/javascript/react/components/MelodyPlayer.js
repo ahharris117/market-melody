@@ -1,13 +1,10 @@
 import React from 'react'
-
 import Tone from 'tone'
-import StartAudioContext from 'startaudiocontext'
 
 const MelodyPlayer = props => {
   const playMelody = () => {
-    let noteArray = []
-    let noteTime = 0
-    let melody_one;
+    let noteArray = [];
+    let noteTime = 0;
     let synth;
     Tone.Transport.stop()
     Tone.Transport.cancel()
@@ -33,14 +30,14 @@ const MelodyPlayer = props => {
     }, noteArray)
     part.start(0);
     Tone.Transport.start()
-  }
+  };
 
   return(
     <div className={props.classStyle}>
       <i className="play-icon far fa-play-circle" onClick={playMelody}></i>
       <div className="melody-title">{props.name}</div>
     </div>
-  )
-}
+  );
+};
 
 export default MelodyPlayer

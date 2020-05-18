@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 import FormSelect from './FormSelect'
 import ErrorList from './ErrorList'
-
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 
 const MelodyForm = props => {
   const [formData, setFormData] = useState({
@@ -15,12 +14,9 @@ const MelodyForm = props => {
   const [ matches, setMatches ] = useState([])
   const [ errors, setErrors ] = useState({})
 
-  let intervals = ["Daily", "Weekly", "Monthly"]
+  const intervals = ["Daily", "Weekly", "Monthly"];
 
-  let scaleOptionNames = props.scales.map((scale) => {
-    return scale.name
-  })
-
+  let scaleOptionNames = props.scales.map(scale => scale.name);
 
   let stockOptions = "";
   if (matches.length > 0) {
@@ -32,12 +28,14 @@ const MelodyForm = props => {
       )
     })
   }
+
   const symbolChangeHandler = event => {
+    const currentTarget = event.currentTarget
     setFormData({
       ...formData,
-      [event.currentTarget.id]: event.currentTarget.value
+      [currentTarget.id]: currentTarget.value
     })
-    fetch(`/api/v1/stocks?stock=${event.currentTarget.value}` , {
+    fetch(`/api/v1/stocks?stock=${currentTarget.value}` , {
       credentials: "same-origin",
       method: "GET",
       headers: {
@@ -45,63 +43,57 @@ const MelodyForm = props => {
         "Content-Type": "application/json"
       }
     })
-    .then((response) => {
-      return response.json()
-    })
+    .then(response => response.json())
     .then((body) => {
-      let matchArray = []
+      let matchArray = [];
       if (body.bestMatches) {
         body.bestMatches.forEach((match) => {
-          matchArray.push(
-            { symbol: match["1. symbol"],
-            name: match["2. name"] }
-          )
+          matchArray.push({
+              symbol: match["1. symbol"],
+              name: match["2. name"]
+          })
         })
       }
-      setMatches(matchArray)
+      setMatches(matchArray);
     })
-  }
+  };
 
   const onChangeHandler = event => {
     setFormData({
       ...formData,
       [event.currentTarget.id]: event.currentTarget.value
     })
-  }
+  };
 
-  const handleNameSelect = event => {
-    setFormData()
-  }
+  const handleNameSelect = event => setFormData();
 
   const validateForm = () => {
-    let submitErrors = {}
+    const submitErrors = {};
     const requiredFields = ["stock", "scale", "interval"]
     requiredFields.forEach((field) => {
       if (formData[field].trim() === "") {
-        submitErrors = {
-          ...submitErrors,
-          [field]: "can't be blank"
-        }
+        submitErrors[field] = "can't be blank"
       }
     })
-    setErrors(submitErrors)
-    return _.isEmpty(submitErrors)
-  }
+    setErrors(submitErrors);
+    return _.isEmpty(submitErrors);
+  };
+
   const onSubmitHandler = event => {
-    event.preventDefault()
+    event.preventDefault();
     if (validateForm()) {
-      props.submitForm(formData)
+      props.submitForm(formData);
     }
-  }
+  };
 
   return(
     <Form onSubmit={onSubmitHandler}>
       <ErrorList errors={errors} />
-      <div>{props.error}</div>
+      <div>{props.requestError}</div>
       <Form.Group>
         <Form.Label>Stock Symbol</Form.Label>
-          <Form.Control type="text" id="stock" onChange={symbolChangeHandler} list="data" value={formData.stock} />
-            <datalist id="data">
+          <Form.Control type="text" id="stock" onChange={symbolChangeHandler} list="stock-name-data" value={formData.stock} />
+            <datalist id="stock-name-data">
               <option></option>
               {stockOptions}
             </datalist>
@@ -111,6 +103,7 @@ const MelodyForm = props => {
       <FormSelect
         label="Scale"
         show={props.show}
+        includeEmptyValue={true}
         array={scaleOptionNames}
         id="scale"
         value={formData.scale}
@@ -119,6 +112,7 @@ const MelodyForm = props => {
 
       <FormSelect
         label="Interval"
+        includeEmptyValue={true}
         array={intervals}
         id="interval"
         value={formData.interval}
@@ -127,7 +121,7 @@ const MelodyForm = props => {
 
       <Button className="button" type="submit" value="Submit">Submit</Button>
     </Form>
-  )
-}
+  );
+};
 
 export default MelodyForm

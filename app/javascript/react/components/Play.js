@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
-
 import Tone from 'tone'
-import StartAudioContext from 'startaudiocontext'
-
 import { Chart } from "react-google-charts";
-
 import Button from 'react-bootstrap/Button'
 
 import MelodyPlayer from './MelodyPlayer'
@@ -15,19 +11,19 @@ const Play = props => {
     if (props.melodyInfo.prices) {
       let time = 35;
       props.melodyInfo.prices.forEach((price) => {
-        let rowArray = [time, price]
-        time --
+        let rowArray = [time, price];
+        time--
         data.unshift(rowArray)
       })
       data.unshift(["Date", "Price"])
       return data
     }
-  }
+  };
 
   const handleSave = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     props.saveMelody()
-  }
+  };
 
   let saveButton = "";
   if (props.melodyInfo.user) {
@@ -36,7 +32,7 @@ const Play = props => {
     )
   } else {
     saveButton = (
-        <a href="/users/sign_in">Sign in to save a melody</a>
+      <a href="/users/sign_in">Sign in to save a melody</a>
     )
   }
 
@@ -74,7 +70,7 @@ const Play = props => {
       </div>
       {saveButton}
     </div>
-  )
-}
+  );
+};
 
 export default Play

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import Form from 'react-bootstrap/Form'
 
 const FormSelect = props => {
@@ -8,29 +7,20 @@ const FormSelect = props => {
       <option key={index}>
         {item}
       </option>
-    )
-  })
+    );
+  });
 
-  let show;
-  if (props.show) {
-    show = (
-      <i className="fas fa-info-circle" onClick={props.show}></i>
-    )
-  }
-  
-  let initialValue = ( <option></option> )
-  if (props.includeEmptyValue === false) {
-    initialValue = ""
-  }
   return(
     <Form.Group>
-      <Form.Label>{props.label} {show}</Form.Label>
+      <Form.Label>
+        {props.label} {props.show && <i className="fas fa-info-circle" onClick={props.show}></i>}
+      </Form.Label>
       <Form.Control as="select" id={props.id} value={props.value} onChange={props.onChangeHandler}>
-        {initialValue}
+        {props.includeEmptyValue ? <option></option> : ""}
         {optionList}
       </Form.Control>
     </Form.Group>
-  )
-}
+  );
+};
 
 export default FormSelect
