@@ -8,7 +8,7 @@ const UserTile = props => {
       <div>{props.userInfo.email}</div>
       <div>Melodies: {props.melodies.length}</div>
     </>
-  )
-}
+  );
+};
 
 export default UserTile

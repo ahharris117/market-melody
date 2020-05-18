@@ -1,21 +1,12 @@
 import React from 'react'
-
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
 const MelodyModal = props => {
-  const hide = () => {
-    props.hideModal("melody")
-  }
-
-  let melodyNotes;
-
-  if (props.melody) {
-    melodyNotes = props.melody.join(' ')
-  }
+  const hide = () => props.hideModal("melody");
 
   return(
-    <Modal 
+    <Modal
       show={props.show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
@@ -26,14 +17,14 @@ const MelodyModal = props => {
       </Modal.Header>
 
       <Modal.Body>
-        <div>{melodyNotes}</div>
+        <div>{props.melody && props.melody.join(' ')}</div>
       </Modal.Body>
 
       <Modal.Footer>
         <Button variant="primary" onClick={hide}>Close</Button>
       </Modal.Footer>
     </Modal>
-  )
-}
+  );
+};
 
 export default MelodyModal

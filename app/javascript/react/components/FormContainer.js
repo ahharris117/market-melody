@@ -27,19 +27,15 @@ const FormContainer = props => {
     fetch('/api/v1/scales')
     .then((response) => {
       if (response.ok) {
-        return response
+        return response;
       } else {
         let errorMessage = `${response.status} (${response.statusText})`,
           error = new Error(errorMessage);
         throw(error);
       }
     })
-    .then((response) => {
-      return response.json()
-    })
-    .then((body) => {
-      setScales(body)
-    })
+    .then(response => response.json())
+    .then(body => setScales(body))
   }, [])
 
   const submitForm = (formPayload) => {
@@ -52,22 +48,18 @@ const FormContainer = props => {
         "Content-Type": "application/json"
       }
     })
-    .then((response) => {
-      return response.json()
-    })
+    .then(response => response.json())
     .then((response) => {
       if (response.status === 'error') {
+        shouldShowPlay(false);
         throw new Error(response.message)
-        shouldShowPlay(false)
       } else {
-        shouldShowPlay(true)
+        shouldShowPlay(true);
       }
-      setErrorMessage("")
-      setMelodyInfo(response)
+      setErrorMessage("");
+      setMelodyInfo(response);
     })
-    .catch((error) => {
-      setErrorMessage(error.message)
-    })
+    .catch(error => setErrorMessage(error.message))
   }
 
   const saveMelody = () => {
@@ -84,12 +76,10 @@ const FormContainer = props => {
         "Content-Type": "application/json"
       }
     })
-    .then((response) => {
-      return response.json()
-    })
+    .then(response => response.json())
     .then((body) => {
-      setShowId(body)
-      setShouldRedirect(true)
+      setShowId(body);
+      setShouldRedirect(true);
     })
   }
 
@@ -97,20 +87,10 @@ const FormContainer = props => {
     return <Redirect to={`/melodies/${showId}`} />
   }
 
-  let playComponent;
-  if (showPlay === true) {
-    playComponent = <Play melodyInfo={melodyInfo} saveMelody={saveMelody} />
-  } else {
-    playComponent = ""
-  }
+  const show = () => shouldShowModal(true);
 
-  const show = () => {
-    shouldShowModal(true)
-  }
+  const hide = () => shouldShowModal(false);
 
-  const hide = () => {
-    shouldShowModal(false)
-  }
   return(
     <div>
       <ScaleInfoModal show={showModal} hide={hide} />
@@ -118,13 +98,13 @@ const FormContainer = props => {
         <MelodyForm
           show={show}
           scales={scales}
-          error={errorMessage}
+          requestError={errorMessage}
           submitForm={submitForm}
         />
       </div>
-      {playComponent}
+      {showPlay && <Play melodyInfo={melodyInfo} saveMelody={saveMelody} />}
     </div>
-  )
-}
+  );
+};
 
 export default FormContainer

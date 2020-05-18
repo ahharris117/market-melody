@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import Home from './home'
+import Home from './Home'
 import FormContainer from './FormContainer'
 import MelodyShowContainer from './MelodyShowContainer'
 import UsersShowContainer from './UsersShowContainer'
@@ -9,7 +9,6 @@ import Feed from './Feed'
 import NavBar from './NavBar'
 
 export const App = (props) => {
-
   return (
     <div>
       <BrowserRouter>
@@ -25,7 +24,7 @@ export const App = (props) => {
         </div>
       </BrowserRouter>
     </div>
-  )
-}
+  );
+};
 
 export default App

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -28,29 +27,21 @@ const UsersShowContainer = props => {
     })
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       }
     })
     .then((body) => {
+      const { user, currentUser } = body
       setUserInfo({
-        id: body.user.id,
-        username: body.user.username,
-        profile_photo: body.user.profile_photo,
-        email: body.user.email
-      })
-      setMelodies(body.user.melodies)
-      setCurrentUser(body.currentUser)
+        id: user.id,
+        username: user.username,
+        profile_photo: user.profile_photo,
+        email: user.email
+      });
+      setMelodies(user.melodies);
+      setCurrentUser(currentUser);
     })
-  }, [])
-
-  let melodyTiles = "";
-  if(melodies.length > 0) {
-    melodyTiles = melodies.map((melody) => {
-      return(
-        <MelodyTile key={melody.id} melody={melody} />
-      )
-    })
-  }
+  }, [props.match.params.id])
 
   return(
     <Container fluid className="user-container">
@@ -60,12 +51,15 @@ const UsersShowContainer = props => {
         </Col>
 
         <Col sm={8} className="melody-tile">
-          {melodyTiles}
+          {melodies.length > 0 && melodies.map((melody) => {
+            return(
+              <MelodyTile key={melody.id} melody={melody} />
+            )
+          })}
         </Col>
       </Row>
     </Container>
-  )
-
-}
+  );
+};
 
 export default UsersShowContainer

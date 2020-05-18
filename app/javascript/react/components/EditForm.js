@@ -1,61 +1,52 @@
 import React, { useState, useEffect } from 'react'
-
-import FormSelect from './FormSelect'
-
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+import FormSelect from './FormSelect'
+
 const EditForm = props => {
   const [ scales, setScales ] = useState([])
-  const [ formValue, setFormValue ] = useState({
-    scale: ""
-  })
+  const [ formValue, setFormValue ] = useState({ scale: "" })
   const [ error, setError ] = useState("")
-  
+
   useEffect(() => {
     fetch('/api/v1/scales')
     .then((response) => {
       if (response.ok) {
-        return response
+        return response;
       } else {
         let errorMessage = `${response.status} (${response.statusText})`,
           error = new Error(errorMessage);
         throw(error);
       }
     })
-    .then((response) => {
-      return response.json()
-    })
-    .then((body) => {
-      setScales(body)
-    })
+    .then(response => response.json())
+    .then(body => setScales(body))
   }, [])
 
   const scaleChange = (event) => {
     setFormValue({
       [event.currentTarget.id]: event.currentTarget.value
-    })
-  }
+    });
+  };
 
-  let scaleOptionNames = "";
-  scaleOptionNames = scales.map((scale) => {
-    return scale.name
-  })
+  const scaleOptionNames = scales.map(scale => scale.name);
 
   const formSubmitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     if (formValue.scale === "") {
-      setError("Must select a scale.")
+      setError("Must select a scale.");
     } else {
-    props.editScale(formValue)
+      props.editScale(formValue);
     }
-  }
+  };
 
   return(
     <Form onSubmit={formSubmitHandler}>
       {error}
       <FormSelect
         label="Scale"
+        includeEmptyValue={true}
         array={scaleOptionNames}
         id="scale"
         value={formValue.scale}
@@ -68,7 +59,7 @@ const EditForm = props => {
           Submit
         </Button>
     </Form>
-  )
-}
+  );
+};
 
 export default EditForm
